@@ -352,7 +352,6 @@ export default {
         if (!this.$refs.invoiceForm.validate()) throw new Error('Please check errors above')
 
         const invoice = await this.create(this.invoice_)
-        window.fathom.trackGoal('F7GYUN9K', 0)
         this.$emit('saved', invoice)
       } catch (error) {
         this.handleSubmitError(error)

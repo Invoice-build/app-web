@@ -44,6 +44,7 @@ export default {
 
   methods: {
     successHandler (invoice) {
+      window.fathom.trackGoal('F7GYUN9K', 0)
       this.$router.push(this.localePath(`/invoices/${invoice.id}`))
     },
 
