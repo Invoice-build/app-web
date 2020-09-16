@@ -67,10 +67,6 @@ export default {
     tx: { type: Object, required: true }
   },
 
-  beforeMount () {
-    console.log(JSON.parse(JSON.stringify(this.tx)))
-  },
-
   computed: {
     stateColor () {
       switch (this.tx.status) {

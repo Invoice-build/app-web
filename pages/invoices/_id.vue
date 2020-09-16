@@ -65,7 +65,6 @@ export default {
     try {
       await this.get(this.id)
       await this.fetchTransactions()
-      console.log(JSON.parse(JSON.stringify(this.invoice)))
     } catch (error) {
       switch (error.status) {
         case 401:
