@@ -172,7 +172,8 @@ export default {
 
     mapUrl () {
       if (!this.hasAddress) return ''
-      const addressParams = Object.values(this.contact_.address_attributes).filter(v => !!v).join(',')
+      const attrs = this.contact_.address_attributes
+      const addressParams = Object.keys(attrs).filter(k => k !== 'id' && !!attrs[k]).map(k => attrs[k]).join(',')
       return `https://www.google.com/maps?q=${addressParams}`
     },
 
