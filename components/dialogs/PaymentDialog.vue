@@ -96,6 +96,13 @@ export default {
       createTx: 'invoices/eth_transactions/create'
     }),
 
+    async successHandler () {
+      window.fathom.trackGoal('KYF4JT3A', 0)
+      this.success = true
+      await this.$utils.sleep(3000)
+      this.$emit('success')
+    },
+
     async initMetaMaskTx () {
       try {
         let network = await this.$eth.network.currentName()
@@ -109,23 +116,18 @@ export default {
         )
 
         network = await this.$eth.network.currentName()
-        const invoiceId = this.invoice.id
         const eth_transaction = { reference: 'payment', network, tx_hash }
-        await this.createTx({ invoiceId, eth_transaction })
-        this.success = true
-        await this.$utils.sleep(3000)
-        this.$emit('success')
+        await this.createTx({ invoiceId: this.invoice.id, eth_transaction })
+        this.successHandler()
       } catch (error) {
         this.error = error.message
       }
     },
 
     initWalletConnectTx () {
-      if (!this.walletConnect.connector.connected) {
-        this.walletConnect.connector.createSession()
-      } else {
-        this.sendWcTx()
-      }
+      this.walletConnect.connector.connected
+        ? this.sendWcTx()
+        : this.walletConnect.connector.createSession()
     },
 
     async sendWcTx () {
@@ -141,9 +143,7 @@ export default {
         const invoiceId = this.invoice.id
         const eth_transaction = { reference: 'payment', network, tx_hash }
         await this.createTx({ invoiceId, eth_transaction })
-        this.success = true
-        await this.$utils.sleep(3000)
-        this.$emit('success')
+        this.successHandler()
       } catch (error) {
         this.error = error.message
         console.error(error)

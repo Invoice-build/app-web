@@ -343,8 +343,7 @@ export default {
     isEthAddr,
 
     ...mapActions({
-      create: 'invoices/create',
-      update: 'invoices/update'
+      create: 'invoices/create'
     }),
 
     async submit () {
@@ -352,19 +351,18 @@ export default {
         this.submitting = true
         if (!this.$refs.invoiceForm.validate()) throw new Error('Please check errors above')
 
-        const invoice = this.invoice_.id
-          ? await this.update(this.invoice_)
-          : await this.create(this.invoice_)
+        const invoice = await this.create(this.invoice_)
+        window.fathom.trackGoal('F7GYUN9K', 0)
         this.$emit('saved', invoice)
       } catch (error) {
-        this.error = error.message
-        this.handleSubmitError()
+        this.handleSubmitError(error)
       } finally {
         this.submitting = false
       }
     },
 
-    async handleSubmitError () {
+    async handleSubmitError (error) {
+      this.error = error.message
       this.submitError = true
       await this.$utils.sleep(2000)
       this.submitError = false
