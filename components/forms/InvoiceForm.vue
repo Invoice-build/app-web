@@ -209,7 +209,7 @@
       </div>
 
       <div class="mt-12">
-        <a href="" @click.prevent="prefillDialog = true" class="text-xs text-gray-500 hover:text-blue-500">
+        <a v-if="editable" href="" @click.prevent="prefillDialog = true" class="text-xs text-gray-500 hover:text-blue-500">
           {{ $t('actions.share_prefilled_invoice') }}
         </a>
         <base-btn type="submit" v-if="editable" :color="submitError ? 'red' : 'black'" :loading="submitting" :disabled="submitting || submitError" block>
