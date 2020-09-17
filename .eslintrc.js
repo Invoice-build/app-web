@@ -16,8 +16,9 @@ module.exports = {
   // add your custom rules here
   rules: {
     semi: ['warn', 'never'],
-    camelcase: 'warn',
+    camelcase: 'off',
     curly: 'off',
+    'no-console': 'off',
     'arrow-parens': ['error', 'as-needed'],
     'import/namespace': ['error', { allowComputed: true }],
     'vue/max-attributes-per-line': ['warn', {

@@ -8,7 +8,12 @@
         </span>
       </div>
     </td>
-    <td v-if="items.length > 1" :colspan="2" class="blank-slate pt-2" @click="items.pop()">
+    <td
+      v-if="items.length > 1"
+      :colspan="2"
+      class="blank-slate pt-2"
+      @click="items.pop()"
+    >
       <div class="p-2 flex items-center justify-center bg-white border border-dashed border-gray-400 cursor-pointer text-gray-500 hover:text-red-500 hover:border-red-500 text-sm">
         <base-icon name="fas fa-minus" />
         <span class="ml-2">

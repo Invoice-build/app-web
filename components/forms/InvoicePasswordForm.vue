@@ -11,7 +11,14 @@
         :rules="[isRequired()]"
         class="text-4xl"
       />
-      <base-btn type="submit" color="black" :loading="submitting" :disabled="submitting" class="mt-8" block>
+      <base-btn
+        type="submit"
+        color="black"
+        :loading="submitting"
+        :disabled="submitting"
+        class="mt-8"
+        block
+      >
         {{ $t('labels.unlock_invoice') }}
       </base-btn>
     </div>

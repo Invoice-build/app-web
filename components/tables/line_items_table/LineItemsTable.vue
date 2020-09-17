@@ -23,7 +23,13 @@
         </tr>
       </thead>
       <tbody>
-        <line-items-row v-for="(item, i) in lineItems_" :key="i" :item="item" :editable="editable" :class="['bg-white odd:bg-gray-100']" />
+        <line-items-row
+          v-for="(item, i) in lineItems_"
+          :key="i"
+          :item="item"
+          :editable="editable"
+          :class="['bg-white odd:bg-gray-100']"
+        />
         <line-items-action-row v-if="editable" :items="lineItems_" />
         <tr>
           <td class="text-right p-2 pt-8" colspan="4">

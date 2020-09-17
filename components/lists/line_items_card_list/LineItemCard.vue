@@ -1,6 +1,8 @@
 <template>
   <base-card class="shadow-lg">
-    <base-card-title class="text-lg text-gray-500">Line item #{{ rowIndex + 1 }}</base-card-title>
+    <base-card-title class="text-lg text-gray-500">
+      Line item #{{ rowIndex + 1 }}
+    </base-card-title>
     <base-card-content>
       <base-text-input
         v-model="item.description"

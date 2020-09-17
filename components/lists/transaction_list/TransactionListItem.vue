@@ -9,7 +9,7 @@
       <div class="truncate">
         {{ tx.tx_hash }}
       </div>
-      <div v-if="tx.finalized && tx.details" class="h-4 w-px bg-green-200"/>
+      <div v-if="tx.finalized && tx.details" class="h-4 w-px bg-green-200" />
       <div v-if="tx.finalized && tx.details" class="flex">
         <div class="h-px w-4 bg-green-200" />
         <div class="-mt-3 ml-2 flex">

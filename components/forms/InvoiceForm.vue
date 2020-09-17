@@ -1,5 +1,5 @@
 <template>
-  <base-form @submit="submit" ref="invoiceForm" class="bg-white w-full rounded-none md:rounded shadow-none md:shadow-lg">
+  <base-form ref="invoiceForm" class="bg-white w-full rounded-none md:rounded shadow-none md:shadow-lg" @submit="submit">
     <div class="p-6">
       <div class="flex flex-col md:flex-row justify-between">
         <div>
@@ -8,8 +8,8 @@
               :tokens="tokens"
               :network="invoice_.network"
               :selected="selectedToken"
-              @change="tokenChangeHandler"
               :disabled="!editable"
+              @change="tokenChangeHandler"
             />
             <h1 class="ml-3">
               {{ $t('labels.invoice') }}
@@ -129,7 +129,9 @@
         </div>
         <div class="mt-4 flex flex-wrap md:flex-no-wrap items-end">
           <div class="w-full md:w-1/4">
-            <h3 class="mr-2 text-gray-500">{{ $t('labels.receiving_address') }}:</h3>
+            <h3 class="mr-2 text-gray-500">
+              {{ $t('labels.receiving_address') }}:
+            </h3>
           </div>
           <div class="flex w-full">
             <base-text-input
@@ -159,7 +161,9 @@
         </div>
         <div class="flex mt-3">
           <div class="w-1/4">
-            <h3 class="mr-2 text-gray-500">{{ $t('labels.network') }}:</h3>
+            <h3 class="mr-2 text-gray-500">
+              {{ $t('labels.network') }}:
+            </h3>
           </div>
           <div class="flex w-full">
             <base-select
@@ -182,7 +186,9 @@
         </div>
         <div class="flex flex-wrap mt-4">
           <div class="w-full md:w-1/4">
-            <h3 class="mr-2 text-gray-500">{{ $t('labels.password') }}:</h3>
+            <h3 class="mr-2 text-gray-500">
+              {{ $t('labels.password') }}:
+            </h3>
           </div>
           <div class="w-full">
             <base-text-input
@@ -209,10 +215,22 @@
       </div>
 
       <div class="mt-12">
-        <a v-if="editable" href="" @click.prevent="prefillDialog = true" class="text-xs text-gray-500 hover:text-blue-500">
+        <a
+          v-if="editable"
+          href=""
+          class="text-xs text-gray-500 hover:text-blue-500"
+          @click.prevent="prefillDialog = true"
+        >
           {{ $t('actions.share_prefilled_invoice') }}
         </a>
-        <base-btn type="submit" v-if="editable" :color="submitError ? 'red' : 'black'" :loading="submitting" :disabled="submitting || submitError" block>
+        <base-btn
+          v-if="editable"
+          type="submit"
+          :color="submitError ? 'red' : 'black'"
+          :loading="submitting"
+          :disabled="submitting || submitError"
+          block
+        >
           <span v-if="submitError">
             {{ error }}
           </span>
@@ -225,7 +243,8 @@
             v-if="invoice.paid"
             disabled
             block
-            size="lg">
+            size="lg"
+          >
             {{ $t('labels.paid') }}!
           </base-btn>
           <base-btn
@@ -234,7 +253,8 @@
             :disabled="submitting || hasPendingTx"
             block
             size="lg"
-            @click="paymentDialog = true">
+            @click="paymentDialog = true"
+          >
             {{ $t('actions.pay_this_invoice') }}
           </base-btn>
         </div>
@@ -249,8 +269,8 @@
     <no-ssr>
       <prefill-dialog
         :show="prefillDialog"
-        @close="prefillDialog = false"
         :url="`https://${$config.APP_DOMAIN}?prefill=${prefillHash}`"
+        @close="prefillDialog = false"
       />
     </no-ssr>
   </base-form>
