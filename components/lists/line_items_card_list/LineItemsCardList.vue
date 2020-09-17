@@ -1,6 +1,13 @@
 <template>
   <div>
-    <line-item-card v-for="(item, i) in lineItems_" :key="i" :item="item" :currency-code="currencyCode" :editable="editable" class="mt-2" />
+    <line-item-card
+      v-for="(item, i) in lineItems_"
+      :key="i"
+      :item="item"
+      :currency-code="currencyCode"
+      :editable="editable"
+      class="mt-2"
+    />
     <div class="flex -mx-2 mt-2">
       <div :class="['blank-slate pt-2 mx-2', (lineItems_.length === 1 ? 'w-full' : 'w-2/3')]" @click="lineItems_.push({})">
         <div class="p-2 flex items-center justify-center bg-white border border-dashed border-gray-400 cursor-pointer text-gray-500 hover:text-green-500 hover:border-green-500 text-sm">
@@ -59,7 +66,7 @@
         {{ total | money }}
       </div>
     </div>
-    <div class="flex justify-end" v-if="invoice.paid_amount > 0">
+    <div v-if="invoice.paid_amount > 0" class="flex justify-end">
       <div class="text-right p-2 text-2xl font-bold">
         {{ $t('labels.paid') }}
         <span class="text-xs">({{ currencyCode }})</span>

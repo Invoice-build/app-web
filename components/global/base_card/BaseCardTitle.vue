@@ -1,6 +1,6 @@
 <template>
   <div :class="classes">
-    <component v-if="!!title" :is="tag" class="text-2xl">
+    <component :is="tag" v-if="!!title" class="text-2xl">
       {{ title }}
     </component>
     <div class="flex-1">

@@ -10,7 +10,7 @@
       <invoice-password-form :id="id" @success="unlockHandler" />
     </div>
     <div v-else class="py-0 md:py-16">
-      <div  class="invoice-container mx-auto">
+      <div class="invoice-container mx-auto">
         <invoice-form
           v-if="!loading"
           :invoice="invoice"

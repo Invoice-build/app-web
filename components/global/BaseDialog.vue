@@ -11,7 +11,7 @@
         @after-leave="$emit('close')"
       >
         <div v-if="showContent" class="relative w-full" @click.stop>
-          <slot/>
+          <slot />
         </div>
       </transition>
     </div>

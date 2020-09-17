@@ -1,6 +1,6 @@
 <template>
-  <div :class="[`px-${this.spacing/2} pb-${this.vSpacing} w-${this.width}`]">
-    <slot></slot>
+  <div :class="[`px-${spacing/2} pb-${vSpacing} w-${width}`]">
+    <slot />
   </div>
 </template>
 

@@ -8,12 +8,6 @@
 import { mapActions } from 'vuex'
 
 export default {
-  head: {
-    bodyAttrs: {
-      class: 'bg-gray-100'
-    }
-  },
-
   data () {
     return {
       loading: true
@@ -34,6 +28,12 @@ export default {
     ...mapActions({
       getTokens: 'tokens/get'
     })
+  },
+
+  head: {
+    bodyAttrs: {
+      class: 'bg-gray-100'
+    }
   }
 }
 </script>
