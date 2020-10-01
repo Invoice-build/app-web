@@ -1,20 +1,5 @@
-# ib-front
+# Invoice.build Frontend
 
-## Build Setup
+This is the Frontend service for the [invoice.build](https://invoice.build) app. It is a Nuxt.js app.
 
-```bash
-# install dependencies
-$ yarn install
-
-# serve with hot reload at localhost:3000
-$ yarn dev
-
-# build for production and launch server
-$ yarn build
-$ yarn start
-
-# generate static project
-$ yarn generate
-```
-
-For detailed explanation on how things work, check out [Nuxt.js docs](https://nuxtjs.org).
+To setup the invoice.build app locally please follow the instructions in the [app-dev](https://github.com/Invoice-build/app-dev) repo.
