@@ -43,18 +43,19 @@
         <tr>
           <td class="text-right p-2" colspan="4">
             <div class="flex justify-end items-center">
-              <span>{{ $t('labels.tax') }}</span>
-              <base-text-input
-                v-model="taxPercentage"
-                :rules="taxRules"
-                type="number"
-                placeholder="0"
-                autogrow
-                align-right
-                :mb="0"
-                absolute-error
-                :disabled="!editable"
-              />
+              <span class="mr-2">{{ $t('labels.tax') }}</span>
+              <div class="w-8">
+                <base-text-input
+                  v-model="taxPercentage"
+                  :rules="taxRules"
+                  type="number"
+                  placeholder="0"
+                  align-right
+                  :mb="0"
+                  absolute-error
+                  :disabled="!editable"
+                />
+              </div>
               <span class="text-xs">% ({{ currencyCode }})</span>
             </div>
           </td>

@@ -81,7 +81,7 @@ export default {
     size () {
       const inputLength = this.value !== null ? this.value.toString().length : 0
       if (this.autogrow && this.type === 'number') return inputLength > 1 ? inputLength + 1 : 2
-      else if (this.autogrow) return inputLength > 1 ? inputLength - 1 : 1
+      else if (this.autogrow) return inputLength > 1 ? inputLength + 2 : 1
       return 0
     },
 

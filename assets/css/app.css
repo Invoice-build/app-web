@@ -1,1 +1,6 @@
 @import "./global/all";
+
+html {
+  @apply text-base;
+  font-family: ibmPlexMono;
+}
