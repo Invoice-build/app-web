@@ -15,17 +15,18 @@
               {{ $t('labels.invoice') }}
             </h1>
             <span class="ml-2 text-gray-500">#</span>
-            <base-text-input
-              v-model="invoice_.number"
-              placeholder="001"
-              :rules="[isRequired()]"
-              :disabled="!editable"
-              required
-              autofocus
-              autogrow
-              :mb="0"
-              absolute-error
-            />
+            <div class="w-20">
+              <base-text-input
+                v-model="invoice_.number"
+                placeholder="0001"
+                :rules="[isRequired()]"
+                :disabled="!editable"
+                required
+                autofocus
+                :mb="0"
+                absolute-error
+              />
+            </div>
           </div>
 
           <span v-if="!!invoice_.created_at" class="text-sm text-gray-500">
@@ -128,7 +129,7 @@
           </h2>
         </div>
         <div class="mt-4 flex flex-wrap md:flex-no-wrap items-end">
-          <div class="w-full md:w-1/4">
+          <div class="w-full md:w-1/3">
             <h3 class="mr-2 text-gray-500">
               {{ $t('labels.receiving_address') }}:
             </h3>
@@ -160,7 +161,7 @@
           </div>
         </div>
         <div class="flex mt-3">
-          <div class="w-1/4">
+          <div class="w-1/3">
             <h3 class="mr-2 text-gray-500">
               {{ $t('labels.network') }}:
             </h3>

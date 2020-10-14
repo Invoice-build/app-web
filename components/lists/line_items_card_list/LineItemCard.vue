@@ -21,11 +21,11 @@
             :disabled="!editable"
           />
         </div>
-        <div class="mx-1 pr-4">
+        <div class="mx-1 pr-12">
           <base-select
             v-model="item.quantity_type"
             :options="quantityTypes"
-            placeholder="Choose quantity type..."
+            placeholder="Quantity type..."
             :required="rowIndex == 0"
             :rules="rowIndex == 0 ? [isRequired()] : []"
             :disabled="!editable"

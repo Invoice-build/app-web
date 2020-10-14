@@ -38,7 +38,7 @@
     <div class="flex justify-end">
       <div class="text-right p-2">
         <div class="flex justify-end items-center">
-          <span>{{ $t('labels.tax') }}</span>
+          <span class="mr-2">{{ $t('labels.tax') }}</span>
           <base-text-input
             v-model="taxPercentage"
             :rules="taxRules"
