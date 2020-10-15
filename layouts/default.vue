@@ -1,13 +1,19 @@
 <template>
   <div>
     <Nuxt v-if="!loading" />
+    <app-nav />
   </div>
 </template>
 
 <script>
 import { mapActions } from 'vuex'
+import AppNav from '~/components/navs/AppNav.vue'
 
 export default {
+  components: {
+    AppNav
+  },
+
   data () {
     return {
       loading: true
