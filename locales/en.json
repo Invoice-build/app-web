@@ -42,10 +42,14 @@
     "walletconnect": "WalletConnect",
     "copied": "Copied",
     "copy": "Copy",
-    "url": "URL"
+    "url": "URL",
+    "about": "About",
+    "code": "Code",
+    "roadmap": "Roadmap",
+    "analytics": "Analytics"
   },
   "hints": {
-    "password": "Invoice payment pages are publically accessible by default, to keep it private set a password here."
+    "password": "Invoice payment pages are publically accessible by default, to make it private set a password."
   },
   "statements": {
     "custom_tokens": "for custom tokens"

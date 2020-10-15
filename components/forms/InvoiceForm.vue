@@ -185,8 +185,8 @@
             {{ $t('labels.settings') }}
           </h2>
         </div>
-        <div class="flex flex-wrap mt-4">
-          <div class="w-full md:w-1/4">
+        <div class="flex flex-wrap md:flex-no-wrap mt-4">
+          <div class="w-full md:w-1/3">
             <h3 class="mr-2 text-gray-500">
               {{ $t('labels.password') }}:
             </h3>
