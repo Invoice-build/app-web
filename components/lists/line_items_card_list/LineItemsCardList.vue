@@ -44,11 +44,11 @@
             :rules="taxRules"
             type="number"
             placeholder="0"
-            autogrow
             align-right
             :mb="0"
             absolute-error
             :disabled="!editable"
+            class="w-8"
           />
           <span class="text-xs">% ({{ currencyCode }})</span>
         </div>
