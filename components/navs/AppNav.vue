@@ -12,7 +12,7 @@
       <div class="h-20 w-full bg-black nav-box-footer"></div>
     </div>
     <div
-      :class="['nav-btn w-12 md:w-16 h-12 md:h-16 shadow-2xl rounded-full z-50 fixed bottom-0 right-0 mr-4 md:mr-8 mb-4 md:mb-8 cursor-pointer', iconBgColor]"
+      :class="['nav-btn w-16 h-16 shadow-2xl rounded-full z-50 fixed bottom-0 right-0 mr-4 md:mr-8 mb-4 md:mb-8 cursor-pointer', iconBgColor]"
       @click="showMenu = !showMenu">
       <div class="w-full h-full flex items-center justify-center">
         <span :class="['text-xl md:text-2xl font-bold', iconTextColor]">
