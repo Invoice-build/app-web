@@ -21,7 +21,7 @@
             :disabled="!editable"
           />
         </div>
-        <div class="mx-1 pr-12">
+        <div class="mx-1">
           <base-select
             v-model="item.quantity_type"
             :options="quantityTypes"

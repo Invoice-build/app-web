@@ -47,7 +47,7 @@
             </div>
           </div>
         </div>
-        <div class="flex mt-4 md:mt-0">
+        <div class="mt-4 md:mt-0 hidden md:flex">
           <div class="font-medium text-gray-500 text-right mr-1 leading-tight">
             {{ (!editable && !invoice_.due_at) ? $t('labels.due_on_receipt') : $t('labels.due') }}
           </div>
