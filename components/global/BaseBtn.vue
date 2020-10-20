@@ -7,19 +7,29 @@
     v-on="listeners"
   >
     <div class="flex justify-center items-center w-full h-full">
-      <base-loading-icon
-        v-if="loading"
-        :size="size"
-        :color="loadingColorClass"
-        class="mr-2"
-      />
+      <div v-if="loading" class="w-full">
+        <div>
+          {{ loadingLabel }}
+        </div>
+        <div class="relative w-full h-full">
+          <div class="absolute right-0 top-0">
+            <base-loading-icon
+              :size="size"
+              :color="loadingColorClass"
+              :class="{ '-mt-6': size === 'lg', '-mt-3': size === 'md' }"
+            />
+          </div>
+        </div>
+      </div>
       <div v-else>
         <base-icon
           v-if="icon"
           :name="icon"
           :class="[textColorClass, iconSize, { 'mr-2': !circle }]"
         />
-        <slot />
+        <span class="truncate">
+          <slot />
+        </span>
       </div>
     </div>
   </component>
@@ -39,6 +49,7 @@ export default {
     circle: { type: Boolean, default: false },
     flat: { type: Boolean, default: false },
     loading: { type: Boolean, default: false },
+    loadingLabel: { type: String, default: 'loading...' },
     disabled: { type: Boolean, default: false },
     icon: { type: String, default: null }
   },
@@ -81,13 +92,13 @@ export default {
       } else {
         switch (this.size) {
           case 'lg':
-            return 'px-12 h-16 text-2xl'
+            return 'px-2 md:px-12 h-16 text-lg md:text-2xl'
           case 'sm':
             return 'px-4 h-8 text-xs'
           case 'xs':
             return 'px-2 h-6 text-xs'
           default:
-            return 'px-8 h-12 text-base'
+            return 'px-2 md:px-8 h-12 text-base'
         }
       }
     },
