@@ -46,7 +46,11 @@
     "about": "About",
     "code": "Code",
     "roadmap": "Roadmap",
-    "analytics": "Analytics"
+    "analytics": "Analytics",
+    "creating": "Creating",
+    "submitting": "Submitting",
+    "confirming": "Confirming",
+    "checking": "Checking"
   },
   "hints": {
     "password": "Invoice payment pages are publically accessible by default, to make it private set a password."

@@ -15,6 +15,7 @@
         type="submit"
         color="black"
         :loading="submitting"
+        :loading-label="`${$t('labels.checking')}...`"
         :disabled="submitting"
         class="mt-8"
         block

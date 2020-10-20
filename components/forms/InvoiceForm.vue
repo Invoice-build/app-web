@@ -143,7 +143,7 @@
               :mb="0"
               absolute-error
               required
-              class="flex-1"
+              :class="['flex-1', { 'border-b-2 border-green-200': !editable }]"
             />
             <base-btn
               v-if="!!invoice_.payment_address"
@@ -229,6 +229,7 @@
           type="submit"
           :color="submitError ? 'red' : 'black'"
           :loading="submitting"
+          :loading-label="`${$t('labels.creating')}...`"
           :disabled="submitting || submitError"
           block
         >
@@ -251,6 +252,7 @@
           <base-btn
             v-else
             :loading="submitting || hasPendingTx"
+            :loading-label="paymentLoadingLabel"
             :disabled="submitting || hasPendingTx"
             block
             size="lg"
@@ -332,6 +334,11 @@ export default {
 
     selectedToken () {
       return this.tokens.find(t => t.id === this.invoice_.token_id)
+    },
+
+    paymentLoadingLabel () {
+      if (this.hasPendingTx) return `${this.$t('labels.confirming')}...`
+      return `${this.$t('labels.submitting')}...`
     }
   },
 
