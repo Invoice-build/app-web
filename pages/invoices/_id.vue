@@ -16,7 +16,6 @@
           :invoice="invoice"
           :transactions="transactions"
           :editable="editable"
-          class="mt-4"
           @saved="invoiceSavedHandler"
           @signed-tx="pollForConfirmation"
         />
