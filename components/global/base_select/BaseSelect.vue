@@ -4,6 +4,7 @@
       v-model="textInputValue"
       :name="name"
       :rules="rules"
+      :label="label"
       validate-on="none"
       :required="required"
       :disabled="disabled"
@@ -51,7 +52,7 @@ export default {
   props: {
     options: { type: Array, required: true },
     value: { type: String, default: '' },
-    label: { type: String, default: null },
+    label: { type: String, default: '' },
     name: { type: String, default: '' },
     filterable: { type: Boolean, default: false },
     required: { type: Boolean, default: false },

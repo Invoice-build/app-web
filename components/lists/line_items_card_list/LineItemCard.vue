@@ -6,36 +6,35 @@
     <base-card-content>
       <base-text-input
         v-model="item.description"
-        placeholder="Item details..."
+        :label="$t('labels.description')"
         :required="rowIndex == 0"
         :rules="rowIndex == 0 ? [isRequired()] : []"
         :disabled="!editable"
+        class="mb-2"
       />
-      <div class="flex items-center -mx-1">
-        <div class="mx-1 w-1/2">
-          <base-text-input
-            v-model="item.quantity"
-            placeholder="Quantity e.g. 1"
-            :required="rowIndex == 0"
-            :rules="quantityRules"
-            :disabled="!editable"
-          />
-        </div>
-        <div class="mx-1">
-          <base-select
-            v-model="item.quantity_type"
-            :options="quantityTypes"
-            placeholder="Quantity type..."
-            :required="rowIndex == 0"
-            :rules="rowIndex == 0 ? [isRequired()] : []"
-            :disabled="!editable"
-          />
-        </div>
-      </div>
-      <div class="flex">
+      <base-text-input
+        v-model="item.quantity"
+        :label="$t('labels.units')"
+        placeholder="e.g. 1"
+        :required="rowIndex == 0"
+        :rules="quantityRules"
+        :disabled="!editable"
+        class="mb-2"
+      />
+      <base-select
+        v-model="item.quantity_type"
+        :options="quantityTypes"
+        :label="$t('labels.unit_type')"
+        placeholder="Choose..."
+        :required="rowIndex == 0"
+        :rules="rowIndex == 0 ? [isRequired()] : []"
+        :disabled="!editable"
+        class="mb-2"
+      />
+      <div class="flex items-end">
         <base-text-input
           v-model="item.unit_price"
-          placeholder="Price/unit..."
+          :label="$t('labels.price_per_unit')"
           :required="rowIndex == 0"
           :rules="unitPriceRules"
           :disabled="!editable"

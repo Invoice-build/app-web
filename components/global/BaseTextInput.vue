@@ -1,5 +1,8 @@
 <template>
   <div>
+    <div v-if="!!label" class="text-gray-700">
+      {{ label }}
+    </div>
     <div :class="containerClasses">
       <input
         :ref="name"
@@ -32,6 +35,7 @@ export default {
   props: {
     type: { type: String, default: 'text' },
     name: { type: String, default: 'input' },
+    label: { type: String, default: '' },
     value: { type: [String, Number], default: '' },
     validateOn: { type: String, default: 'input' },
     rules: { type: Array, default: () => [] },
@@ -127,7 +131,7 @@ export default {
     },
 
     textClasses () {
-      const classes = []
+      const classes = ['opacity-1']
       if (this.hasError) classes.push('placeholder-red-500', 'text-red-500')
       else if (this.required) classes.push('placeholder-orange-500')
 

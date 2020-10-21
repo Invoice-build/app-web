@@ -2,5 +2,9 @@
 
 html {
   @apply text-base;
-  font-family: ibmPlexMono;
+  font-family: ibmPlexMono, monospace;
+}
+
+body {
+  @apply max-w-full;
 }
