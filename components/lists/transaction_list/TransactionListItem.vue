@@ -12,7 +12,7 @@
       <div v-if="tx.finalized && tx.details" class="h-4 w-px bg-green-200" />
       <div v-if="tx.finalized && tx.details" class="flex">
         <div class="h-px w-4 bg-green-200" />
-        <div class="-mt-3 ml-2 flex">
+        <div class="-mt-3 ml-2 flex flex-col md:flex-row">
           <span v-if="!tx.transactable_valid" class="mr-2">
             <i class="fas fa-ban" />
           </span>
@@ -22,20 +22,24 @@
           <span class="font-bold mr-2">
             {{ tx.token.code }}
           </span>
-          <span class="opacity-50 mr-2 lowercase">
-            {{ $t('labels.from') }}
-          </span>
-          <span class="truncate min-w-0 w-32 mr-2 hover:underline">
-            <a :href="$eth.link.address(tx.details.from, { network: tx.network })" target="_blank" rel="noreferrer">
-              {{ tx.details.from }}
-            </a>
-          </span>
-          <span class="opacity-50 mr-2 lowercase">
-            {{ $t('labels.on') }}
-          </span>
-          <span>
-            {{ tx.finalized_at | datetime }}
-          </span>
+          <div class="flex tuncate">
+            <span class="opacity-50 mr-2 lowercase">
+              {{ $t('labels.from') }}
+            </span>
+            <span class="truncate min-w-0 w-32 mr-2 hover:underline">
+              <a :href="$eth.link.address(tx.details.from, { network: tx.network })" target="_blank" rel="noreferrer">
+                {{ tx.details.from }}
+              </a>
+            </span>
+          </div>
+          <div class="flex">
+            <span class="opacity-50 mr-2 lowercase">
+              {{ $t('labels.on') }}
+            </span>
+            <span>
+              {{ tx.finalized_at | datetime }}
+            </span>
+          </div>
         </div>
       </div>
     </div>
