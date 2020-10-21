@@ -12,8 +12,7 @@
       <div class="h-20 w-full bg-black nav-box-footer"></div>
     </div>
     <div
-      v-if="showBtn"
-      :class="['nav-btn w-16 h-16 shadow-2xl rounded-full z-50 fixed bottom-0 right-0 mr-4 md:mr-8 mb-4 md:mb-8 cursor-pointer', iconBgColor]"
+      :class="['nav-btn w-16 h-16 shadow-2xl rounded-full z-50 fixed bottom-0 right-0 mr-4 md:mr-8 mb-4 md:mb-8 cursor-pointer', iconBgColor, btnDisplayClass]"
       @click="showMenu = !showMenu">
       <div class="w-full h-full flex items-center justify-center">
         <span :class="['text-xl md:text-2xl font-bold', iconTextColor]">
@@ -50,25 +49,34 @@ export default {
     iconTextColor () {
       if (this.showMenu) return 'text-black'
       return 'text-white'
+    },
+
+    btnDisplayClass () {
+      return this.showBtn ? 'visible' : 'invisible'
     }
   },
 
   mounted () {
-    this.toggleBtnOnScroll()
+    window.addEventListener('scroll', this.toggleBtnOnScroll, true)
+  },
+
+  beforeDestroy () {
+    window.removeEventListener('scroll', this.toggleBtnOnScroll, true)
   },
 
   methods: {
     toggleBtnOnScroll () {
-      window.addEventListener('scroll', e => {
-        const scrollPos = window.scrollY
-        const winHeight = window.innerHeight
-        const diff = winHeight - scrollPos
-        if (diff < 0 && this.showBtn) {
-          this.showBtn = false
-        } else if (diff >= 0 && !this.showBtn) {
-          this.showBtn = true
-        }
-      })
+      const scrollPosition = window.pageYOffset
+      const windowSize = window.innerHeight
+      const bodyHeight = document.body.offsetHeight
+
+      const bottomOffset = Math.max(bodyHeight - (scrollPosition + windowSize), 0)
+
+      if (bottomOffset < 100 && this.showBtn) {
+        this.showBtn = false
+      } else if (bottomOffset >= 100 && !this.showBtn) {
+        this.showBtn = true
+      }
     }
   }
 }
