@@ -16,12 +16,14 @@
           <span v-if="!tx.transactable_valid" class="mr-2">
             <i class="fas fa-ban" />
           </span>
-          <span class="font-bold mr-2">
-            {{ tx.details.amount | money }}
-          </span>
-          <span class="font-bold mr-2">
-            {{ tx.token.code }}
-          </span>
+          <div class="flex">
+            <span class="font-bold mr-2">
+              {{ tx.details.amount | money }}
+            </span>
+            <span class="font-bold mr-2">
+              {{ tx.token.code }}
+            </span>
+          </div>
           <div class="flex tuncate">
             <span class="opacity-50 mr-2 lowercase">
               {{ $t('labels.from') }}
