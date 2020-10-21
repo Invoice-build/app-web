@@ -7,13 +7,13 @@
             {{ $t('labels.details') }}
           </th>
           <th class="text-right font-medium py-4 px-2 whitespace-no-wrap">
-            {{ $t('labels.quantity') }}
+            {{ $t('labels.units') }}
           </th>
           <th class="text-left font-medium py-4 px-2 whitespace-no-wrap">
-            {{ $t('labels.unit') }}
+            {{ $t('labels.unit_type') }}
           </th>
           <th class="text-right font-medium py-4 px-2 whitespace-no-wrap">
-            {{ $t('labels.unit_price') }}
+            {{ $t('labels.price_per_unit') }}
             <span class="text-xs">({{ currencyCode }})</span>
           </th>
           <th class="text-right font-medium py-4 px-2 whitespace-no-wrap">

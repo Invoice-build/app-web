@@ -15,7 +15,9 @@
     "email": "Email",
     "details": "Details",
     "quantity": "Quantity",
-    "unit": "Unit",
+    "quantity_type": "Quantity type",
+    "units": "Units",
+    "unit_type": "Unit type",
     "unit_price": "Unit Price",
     "amount": "Amount",
     "subtotal": "Subtotal",
@@ -50,7 +52,9 @@
     "creating": "Creating",
     "submitting": "Submitting",
     "confirming": "Confirming",
-    "checking": "Checking"
+    "checking": "Checking",
+    "description": "Description",
+    "price_per_unit": "Price/unit"
   },
   "hints": {
     "password": "Invoice payment pages are publically accessible by default, to make it private set a password."

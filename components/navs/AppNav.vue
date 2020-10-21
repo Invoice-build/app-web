@@ -12,6 +12,7 @@
       <div class="h-20 w-full bg-black nav-box-footer"></div>
     </div>
     <div
+      v-if="showBtn"
       :class="['nav-btn w-16 h-16 shadow-2xl rounded-full z-50 fixed bottom-0 right-0 mr-4 md:mr-8 mb-4 md:mb-8 cursor-pointer', iconBgColor]"
       @click="showMenu = !showMenu">
       <div class="w-full h-full flex items-center justify-center">
@@ -29,6 +30,7 @@ export default {
 
   data () {
     return {
+      showBtn: true,
       showMenu: false,
       menuItems: [
         { label: this.$t('labels.about'), icon: 'fas fa-info-circle', url: 'https://garethfullers.site/blog/im-open-sourcing-my-next-side-project/' },
@@ -48,6 +50,25 @@ export default {
     iconTextColor () {
       if (this.showMenu) return 'text-black'
       return 'text-white'
+    }
+  },
+
+  mounted () {
+    this.toggleBtnOnScroll()
+  },
+
+  methods: {
+    toggleBtnOnScroll () {
+      window.addEventListener('scroll', e => {
+        const scrollPos = window.scrollY
+        const winHeight = window.innerHeight
+        const diff = winHeight - scrollPos
+        if (diff < 0 && this.showBtn) {
+          this.showBtn = false
+        } else if (diff >= 0 && !this.showBtn) {
+          this.showBtn = true
+        }
+      })
     }
   }
 }
