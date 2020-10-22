@@ -214,7 +214,7 @@ export default {
 
 <style scoped>
 .base-select-options {
-  max-height: 250px;
+  max-height: 260px;
 }
 
 .base-select-spacer {
