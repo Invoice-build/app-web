@@ -131,7 +131,7 @@ export default {
     },
 
     textClasses () {
-      const classes = ['opacity-1']
+      const classes = ['']
       if (this.hasError) classes.push('placeholder-red-500', 'text-red-500')
       else if (this.required) classes.push('placeholder-orange-500')
 
@@ -177,5 +177,8 @@ input {
 }
 input:focus {
   outline: none;
+}
+input[disabled] {
+   @apply text-black;
 }
 </style>
