@@ -180,5 +180,7 @@ input:focus {
 }
 input[disabled] {
    @apply text-black;
+   -webkit-text-fill-color: currentcolor;
+    opacity: 1;
 }
 </style>
