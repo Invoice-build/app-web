@@ -7,7 +7,7 @@ import Link from './link'
 import Transaction from './transaction'
 import Utils from './utils'
 
-export default ({ app }, inject) => {
+export default (_, inject) => {
   const web3 = new Web3(Web3.givenProvider)
   const config = { web3, genesis: '0x0000000000000000000000000000000000000000' }
 
