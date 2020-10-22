@@ -33,7 +33,7 @@ export default {
       showMenu: false,
       menuItems: [
         { label: this.$t('labels.about'), icon: 'fas fa-info-circle', url: 'https://garethfullers.site/blog/im-open-sourcing-my-next-side-project/' },
-        { label: this.$t('labels.code'), icon: 'fas fa-code', url: 'https://github.com/orgs/Invoice-build/dashboard' },
+        { label: this.$t('labels.code'), icon: 'fas fa-code', url: 'https://github.com/Invoice-build' },
         { label: this.$t('labels.roadmap'), icon: 'fas fa-road', url: 'https://trello.com/b/RKj2K6Hz' },
         { label: this.$t('labels.analytics'), icon: 'fas fa-chart-bar', url: 'https://app.usefathom.com/share/qktowsha/invoice.build' }
       ]
