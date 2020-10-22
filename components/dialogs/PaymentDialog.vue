@@ -20,7 +20,7 @@
           {{ error }}
         </div>
         <base-grid>
-          <base-grid-item width="full" class="md:w-1/2">
+          <base-grid-item v-if="hasMetaMask" width="full" class="md:w-1/2">
             <div
               class="wallet-btn bg-gray-100 text-gray-700 py-8 flex flex-col items-center justify-end cursor-pointer rounded hover:bg-gray-200 hover:text-gray-800"
               @click="initMetaMaskTx"
@@ -79,6 +79,12 @@ export default {
   watch: {
     show (newVal) {
       if (!newVal) this.success = false
+    }
+  },
+
+  computed: {
+    hasMetaMask () {
+      return typeof window.ethereum !== 'undefined'
     }
   },
 
