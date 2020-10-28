@@ -9,7 +9,8 @@ export default {
   publicRuntimeConfig: {
     APP_ENV: process.env.APP_ENV || 'development',
     APP_DOMAIN: process.env.APP_DOMAIN || 'localhost:3000',
-    API_URL: process.env.API_URL || 'http://localhost:5000'
+    API_URL: process.env.API_URL || 'http://localhost:5000',
+    INFURA_PROJECT_ID: process.env.INFURA_PROJECT_ID || 'xxx'
   },
 
   head: {
@@ -46,7 +47,7 @@ export default {
   plugins: [
     '~/plugins/axios',
     '~/plugins/globals',
-    '~/plugins/eth',
+    { src: '~/plugins/eth', ssr: false },
     '~/plugins/utils',
     '~/plugins/breakpoints'
   ],

@@ -49,6 +49,7 @@
 </template>
 
 <script>
+import Web3 from 'web3'
 import { mapActions } from 'vuex'
 import WalletConnect from '@walletconnect/client'
 import QRCodeModal from '@walletconnect/qrcode-modal'
@@ -89,6 +90,7 @@ export default {
   },
 
   beforeMount () {
+    this.setProvider()
     if (this.walletConnect.connector.connected) this.walletConnect.connector.killSession()
     this.addWalletConnectListeners()
   },
@@ -102,6 +104,12 @@ export default {
       createTx: 'invoices/eth_transactions/create'
     }),
 
+    setProvider () {
+      if (!Web3.givenProvider) {
+        this.$eth.config.web3 = new Web3(`wss://${this.invoice.network}.infura.io/ws/v3/${this.$config.INFURA_PROJECT_ID}`)
+      }
+    },
+
     async successHandler () {
       window.fathom.trackGoal('KYF4JT3A', 0)
       this.success = true
@@ -111,6 +119,7 @@ export default {
 
     async initMetaMaskTx () {
       try {
+        window.fathom.trackGoal('BCMLWFRH', 0)
         let network = await this.$eth.network.currentName()
         if (network !== this.invoice.network) throw new Error(`Please switch to ${this.invoice.network}`)
 
@@ -131,6 +140,7 @@ export default {
     },
 
     initWalletConnectTx () {
+      window.fathom.trackGoal('BCMLWFRH', 0)
       this.walletConnect.connector.connected
         ? this.sendWcTx()
         : this.walletConnect.connector.createSession()
