@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div v-if="!!label" class="text-gray-700">
+    <div v-if="!!label" class="text-gray-600">
       {{ label }}
     </div>
     <div :class="containerClasses">
