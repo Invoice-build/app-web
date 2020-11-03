@@ -54,7 +54,8 @@
     "confirming": "Confirming",
     "checking": "Checking",
     "description": "Description",
-    "price_per_unit": "Price/unit"
+    "price_per_unit": "Price/unit",
+    "new_invoice": "New invoice"
   },
   "hints": {
     "password": "Invoice payment pages are publically accessible by default, to make it private set a password."
