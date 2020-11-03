@@ -91,7 +91,7 @@
     },
     "prefill": {
       "title": "Share this prefilled invoice",
-      "description": "The URL below can be shared giving the recipient access to this prefilled out invoice form."
+      "description": "The URL below generates a prefilled invoice form with the inputs you have provided."
     }
   },
   "options": {
