@@ -2,16 +2,19 @@
   <div>
     <Nuxt v-if="!loading" />
     <app-nav />
+    <app-snackbars />
   </div>
 </template>
 
 <script>
 import { mapActions } from 'vuex'
 import AppNav from '~/components/navs/AppNav.vue'
+import AppSnackbars from '~/components/alerts/AppSnackbars.vue'
 
 export default {
   components: {
-    AppNav
+    AppNav,
+    AppSnackbars
   },
 
   data () {

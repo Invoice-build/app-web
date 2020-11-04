@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapState, mapMutations } from 'vuex'
 import CryptoJS from 'crypto-js'
 import InvoiceForm from '~/components/forms/InvoiceForm.vue'
 
@@ -51,9 +51,14 @@ export default {
   },
 
   methods: {
+    ...mapMutations({
+      showSnackbar: 'snackbars/setCurrent'
+    }),
+
     successHandler (invoice) {
       window.fathom.trackGoal('F7GYUN9K', 0)
       this.$router.push(this.localePath(`/invoices/${invoice.id}`))
+      this.showSnackbar({ label: 'Invoice created!', icon: 'fas fa-check-circle', type: 'success' })
     },
 
     parsePrefill () {
