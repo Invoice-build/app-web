@@ -58,7 +58,7 @@ export default {
   },
 
   mounted () {
-    window.addEventListener('scroll', this.toggleBtnOnScroll, true)
+    if (window.innerWidth <= 600) window.addEventListener('scroll', this.toggleBtnOnScroll, true)
   },
 
   beforeDestroy () {
