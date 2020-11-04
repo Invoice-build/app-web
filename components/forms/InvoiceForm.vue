@@ -1,7 +1,7 @@
 <template>
   <base-form ref="invoiceForm" class="bg-white w-full rounded-none md:rounded shadow-none md:shadow-lg" @submit="submit">
     <div class="p-6">
-      <div class="flex flex-col md:flex-row justify-between">
+      <div class="flex flex-col md:flex-row justify-between items-start">
         <div>
           <div class="flex items-center text-3xl font-light text-gray-900">
             <token-select-input
@@ -47,9 +47,9 @@
             </div>
           </div>
         </div>
-        <div class="mt-4 md:mt-0 hidden md:flex">
-          <div class="font-medium text-gray-500 text-right mr-1 leading-tight">
-            {{ (!editable && !invoice_.due_at) ? $t('labels.due_on_receipt') : $t('labels.due') }}
+        <div class="mt-4 md:mt-0 hidden md:flex h-auto">
+          <div :class="['font-medium text-right mr-1', dueClasses]">
+            {{ dueLabel }}
           </div>
           <div>
             <base-text-input
@@ -339,6 +339,27 @@ export default {
     paymentLoadingLabel () {
       if (this.hasPendingTx) return `${this.$t('labels.confirming')}...`
       return `${this.$t('labels.submitting')}...`
+    },
+
+    isOverdue () {
+      if (!this.invoice_.due_at) return false
+
+      const dueAt = +new Date(this.invoice_.due_at)
+      const now = +new Date()
+      return dueAt < now
+    },
+
+    dueClasses () {
+      if (!this.editable && this.isOverdue) return 'bg-red-500 text-white px-2 py-px leading-none rounded'
+      return 'text-gray-500 leading-tight'
+    },
+
+    dueLabel () {
+      if (!this.editable) {
+        if (!this.invoice_.due_at) return this.$t('labels.due_on_receipt')
+        if (this.isOverdue) return this.$t('labels.overdue')
+      }
+      return this.$t('labels.due')
     }
   },
 
@@ -362,8 +383,9 @@ export default {
   beforeMount () {
     this.invoice_ = Object.assign({}, this.invoice)
     if (!this.invoice_.tax_bps) this.invoice_.tax_bps = 0
-    if (!this.invoice_.token_id)
+    if (!this.invoice_.token_id) {
       this.invoice_.token_id = this.tokens.find(t => t.code === 'ETH').id
+    }
   },
 
   methods: {

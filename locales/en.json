@@ -4,6 +4,7 @@
     "issued": "Issued",
     "created": "Created",
     "due": "Due",
+    "overdue": "Overdue",
     "due_on_receipt": "Due on receipt",
     "from": "From",
     "to": "To",
