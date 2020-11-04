@@ -69,6 +69,9 @@
     "pay_this_invoice": "Pay this invoice",
     "share_prefilled_invoice": "Share prefilled invoice"
   },
+  "alerts": {
+    "invoice_created": "Invoice created!"
+  },
   "models": {
     "address": {
       "labels": {

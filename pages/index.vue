@@ -58,7 +58,7 @@ export default {
     successHandler (invoice) {
       window.fathom.trackGoal('F7GYUN9K', 0)
       this.$router.push(this.localePath(`/invoices/${invoice.id}`))
-      this.showSnackbar({ label: 'Invoice created!', icon: 'fas fa-check-circle', type: 'success' })
+      this.showSnackbar({ label: this.$t('alerts.invoice_created'), icon: 'fas fa-check-circle', type: 'success' })
     },
 
     parsePrefill () {
