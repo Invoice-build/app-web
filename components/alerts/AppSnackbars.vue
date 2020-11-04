@@ -9,7 +9,7 @@
             <i class="fas fa-times text-base"></i>
           </div>
         </div>
-        <div class="flex items-center p-4">
+        <div class="flex items-center px-4 py-8 md:py-4">
           <i :class="[snackbar.icon, 'text-2xl mr-4']" />
           {{ snackbar.label }}
         </div>
