@@ -140,7 +140,7 @@
                 v-model="paymentAddressInput"
                 name="paymentAddress"
                 ref="paymentAddressInput"
-                placeholder="Ethereum address..."
+                placeholder="Ethereum address or ENS name..."
                 :rules="[isRequired()]"
                 :disabled="!editable"
                 :mb="0"
