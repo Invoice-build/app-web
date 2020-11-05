@@ -6,6 +6,7 @@ import Contract from './contract'
 import Link from './link'
 import Transaction from './transaction'
 import Utils from './utils'
+import Ens from './ens'
 
 export default (_, inject) => {
   const web3 = new Web3(Web3.givenProvider)
@@ -19,6 +20,7 @@ export default (_, inject) => {
     contract: new Contract(config),
     transaction: new Transaction(config),
     link: new Link(config),
-    utils: new Utils(config)
+    utils: new Utils(config),
+    ens: new Ens(config)
   })
 }
