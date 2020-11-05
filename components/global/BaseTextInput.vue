@@ -71,9 +71,9 @@ export default {
           vm.focussed = true
         },
         blur: event => {
-          vm.$emit('blur')
+          vm.$emit('blur', event.target.value)
           vm.focussed = false
-          vm.validate(event.target.value)
+          if (this.validateOn !== 'none') vm.validate(event.target.value)
         }
       }
     },

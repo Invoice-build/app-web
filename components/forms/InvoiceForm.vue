@@ -128,39 +128,47 @@
             {{ $t('labels.payment_details') }}
           </h2>
         </div>
-        <div class="mt-4 flex flex-wrap md:flex-no-wrap items-end">
+        <div class="mt-4 flex flex-wrap md:flex-no-wrap items-start">
           <div class="w-full md:w-1/3">
             <h3 class="mr-2 text-gray-500">
               {{ $t('labels.receiving_address') }}:
             </h3>
           </div>
-          <div class="flex w-full">
-            <base-text-input
-              v-model="invoice_.payment_address"
-              placeholder="Ethereum address..."
-              :rules="[isRequired(), isEthAddr()]"
-              :disabled="!editable"
-              :mb="0"
-              absolute-error
-              required
-              :class="['flex-1', { 'border-b-2 border-green-200': !editable }]"
-            />
-            <base-btn
-              v-if="!!invoice_.payment_address"
-              tag="a"
-              icon="fas fa-external-link-square-alt"
-              color="gray"
-              size="sm"
-              class="ml-2"
-              flat
-              circle
-              :href="$eth.link.address(invoice_.payment_address, { network: invoice_.network })"
-              target="_blank"
-              rel="noreferrer"
-            />
+          <div class="w-full pt-px">
+            <div class="flex w-full">
+              <base-text-input
+                v-model="paymentAddressInput"
+                name="paymentAddress"
+                ref="paymentAddressInput"
+                placeholder="Ethereum address..."
+                :rules="[isRequired()]"
+                :disabled="!editable"
+                :mb="0"
+                validate-on="none"
+                absolute-error
+                required
+                :class="['flex-1', { 'border-b-2 border-green-200': !editable }]"
+              />
+              <base-btn
+                v-if="!!invoice_.payment_address"
+                tag="a"
+                icon="fas fa-external-link-square-alt"
+                color="gray"
+                size="sm"
+                class="ml-2"
+                flat
+                circle
+                :href="$eth.link.address(invoice_.payment_address, { network: invoice_.network })"
+                target="_blank"
+                rel="noreferrer"
+              />
+            </div>
+            <p class="absolute text-xs text-gray-400">
+              {{ paymentAddressHint }}
+            </p>
           </div>
         </div>
-        <div class="flex mt-3">
+        <div class="flex mt-6">
           <div class="w-1/3">
             <h3 class="mr-2 text-gray-500">
               {{ $t('labels.network') }}:
@@ -289,7 +297,7 @@ import TokenSelectInput from '~/components/inputs/TokenSelectInput.vue'
 import PaymentDialog from '~/components/dialogs/PaymentDialog.vue'
 import TransactionList from '~/components/lists/transaction_list/TransactionList.vue'
 import PrefillDialog from '~/components/dialogs/PrefillDialog.vue'
-import { isRequired, isEthAddr } from '~/lib/validations'
+import { isRequired, isEthAddrCheck } from '~/lib/validations'
 
 export default {
   name: 'InvoiceForm',
@@ -315,6 +323,8 @@ export default {
       prefillHash: '',
       submitting: false,
       invoice_: {},
+      paymentAddressInput: '',
+      paymentAddressHint: '',
       paymentDialog: false,
       prefillDialog: false,
       error: '',
@@ -377,6 +387,18 @@ export default {
         this.prefillHash = encodeURIComponent(hash)
       },
       deep: true
+    },
+
+    async paymentAddressInput (newVal) {
+      this.$refs.paymentAddressInput.errors = []
+      if (!isEthAddrCheck(newVal)) {
+        const address = await this.$eth.ens.addressFor(newVal)
+        this.invoice_.payment_address = (address === this.$eth.config.genesis) ? '' : address
+        this.paymentAddressHint = this.invoice_.payment_address
+      } else {
+        this.invoice_.payment_address = newVal
+        this.paymentAddressHint = await this.$eth.ens.nameFor(newVal)
+      }
     }
   },
 
@@ -386,11 +408,11 @@ export default {
     if (!this.invoice_.token_id) {
       this.invoice_.token_id = this.tokens.find(t => t.code === 'ETH').id
     }
+    this.setPaymentAddress()
   },
 
   methods: {
     isRequired,
-    isEthAddr,
 
     ...mapActions({
       create: 'invoices/create'
@@ -399,7 +421,7 @@ export default {
     async submit () {
       try {
         this.submitting = true
-        if (!this.$refs.invoiceForm.validate()) throw new Error('Please check errors above')
+        if (!this.isValidForm()) throw new Error('Please check errors above')
 
         const invoice = await this.create(this.invoice_)
         this.$emit('saved', invoice)
@@ -415,6 +437,18 @@ export default {
       this.submitError = true
       await this.$utils.sleep(2000)
       this.submitError = false
+    },
+
+    isValidForm () {
+      const validInputs = this.$refs.invoiceForm.validate()
+      const validAddress = this.validatePaymentAddress()
+      return validInputs && validAddress
+    },
+
+    validatePaymentAddress () {
+      if (isEthAddrCheck(this.invoice_.payment_address)) return true
+      this.$refs.paymentAddressInput.errors.push('Must be a valid Ethereum address')
+      return false
     },
 
     handleFromChange (newIssuer) {
@@ -435,6 +469,18 @@ export default {
 
     tokenChangeHandler (newTokenId) {
       this.invoice_.token_id = newTokenId
+    },
+
+    async setPaymentAddress () {
+      if (this.invoice.payment_address) {
+        const name = await this.$eth.ens.nameFor(this.invoice.payment_address)
+        if (name) {
+          this.paymentAddressInput = name
+          this.paymentAddressHint = this.invoice.payment_address
+        } else {
+          this.paymentAddressInput = this.invoice.payment_address
+        }
+      }
     }
   }
 }
