@@ -131,7 +131,7 @@
         <div class="mt-4 flex flex-wrap md:flex-no-wrap items-start">
           <div class="w-full md:w-1/3">
             <h3 class="mr-2 text-gray-500">
-              {{ $t('labels.receiving_address') }}:
+              {{ $t('labels.recipient') }}:
             </h3>
           </div>
           <div class="w-full pt-px">

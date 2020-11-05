@@ -29,7 +29,7 @@
     "signup": "Signup",
     "payment_details": "Payment details",
     "edit": "Edit",
-    "receiving_address": "Recipient address",
+    "recipient": "Recipient",
     "transactions": "Transactions",
     "settings": "Settings",
     "network": "Network",
