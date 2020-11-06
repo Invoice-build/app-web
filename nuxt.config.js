@@ -58,8 +58,13 @@ export default {
 
   modules: [
     '@nuxtjs/axios',
+    '@nuxtjs/sentry',
     ['nuxt-i18n', nuxtI18nConfig]
   ],
+
+  sentry: {
+    dsn: 'https://f3efaf39aa4a4e9992315a7f3f267d36@o473092.ingest.sentry.io/5507615'
+  },
 
   buildModules: [
     '@nuxtjs/eslint-module',
