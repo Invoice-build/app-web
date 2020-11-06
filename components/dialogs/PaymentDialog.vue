@@ -77,15 +77,15 @@ export default {
     }
   },
 
-  watch: {
-    show (newVal) {
-      if (!newVal) this.success = false
-    }
-  },
-
   computed: {
     hasMetaMask () {
       return typeof window.ethereum !== 'undefined'
+    }
+  },
+
+  watch: {
+    show (newVal) {
+      if (!newVal) this.success = false
     }
   },
 

@@ -5,8 +5,9 @@
         <div class="relative">
           <div
             class="absolute top-0 right-0 w-6 h-6 flex items-center justify-center rounded-full bg-white bg-opacity-25 cursor-pointer m-1"
-            @click="hide">
-            <i class="fas fa-times text-base"></i>
+            @click="hide"
+          >
+            <i class="fas fa-times text-base" />
           </div>
         </div>
         <div class="flex items-center px-4 py-8 md:py-4">

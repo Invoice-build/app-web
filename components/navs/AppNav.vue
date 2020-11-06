@@ -2,18 +2,26 @@
   <div>
     <div v-if="showMenu" class="nav-box w-64 bg-white shadow-2xl fixed bottom-0 z-50 right-0 mr-2 md:mr-6 mb-2 md:mb-6 rounded flex flex-col">
       <div class="flex flex-col flex-1 py-2">
-        <a v-for="(item, i) in menuItems" :key="i" :href="item.url" class="flex text-gray-700 px-4 py-2 hover:bg-black hover:text-white" :target="item.targetBlank ? '_blank' : '_self'" rel="noreferrer">
+        <a
+          v-for="(item, i) in menuItems"
+          :key="i"
+          :href="item.url"
+          class="flex text-gray-700 px-4 py-2 hover:bg-black hover:text-white"
+          :target="item.targetBlank ? '_blank' : '_self'"
+          rel="noreferrer"
+        >
           <div class="w-8">
-            <i :class="item.icon"></i>
+            <i :class="item.icon" />
           </div>
           <span>{{ item.label }}</span>
         </a>
       </div>
-      <div class="h-20 w-full bg-black nav-box-footer"></div>
+      <div class="h-20 w-full bg-black nav-box-footer" />
     </div>
     <div
       :class="['nav-btn w-16 h-16 shadow-2xl rounded-full z-50 fixed bottom-0 right-0 mr-4 md:mr-8 mb-4 md:mb-8 cursor-pointer', iconBgColor, btnDisplayClass]"
-      @click="showMenu = !showMenu">
+      @click="showMenu = !showMenu"
+    >
       <div class="w-full h-full flex items-center justify-center">
         <span :class="['text-xl md:text-2xl font-bold', iconTextColor]">
           ib

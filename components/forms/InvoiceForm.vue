@@ -137,9 +137,9 @@
           <div class="w-full pt-px">
             <div class="flex w-full">
               <base-text-input
+                ref="paymentAddressInput"
                 v-model="paymentAddressInput"
                 name="paymentAddress"
-                ref="paymentAddressInput"
                 placeholder="Ethereum address or ENS name..."
                 :rules="[isRequired()]"
                 :disabled="!editable"
