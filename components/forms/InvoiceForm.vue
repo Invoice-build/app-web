@@ -299,6 +299,7 @@ import PaymentDialog from '~/components/dialogs/PaymentDialog.vue'
 import TransactionList from '~/components/lists/transaction_list/TransactionList.vue'
 import PrefillDialog from '~/components/dialogs/PrefillDialog.vue'
 import { isRequired, isEthAddrCheck } from '~/lib/validations'
+import { addressFor, nameFor } from '~/lib/eth/ens'
 
 export default {
   name: 'InvoiceForm',
@@ -393,12 +394,12 @@ export default {
     async paymentAddressInput (newVal) {
       this.$refs.paymentAddressInput.errors = []
       if (!isEthAddrCheck(newVal)) {
-        const address = await this.$eth.ens.addressFor(newVal)
+        const address = await addressFor(newVal, this.$eth.config.provider)
         this.invoice_.payment_address = (address === this.$eth.config.genesis) ? '' : address
         this.paymentAddressHint = this.invoice_.payment_address
       } else {
         this.invoice_.payment_address = newVal
-        this.paymentAddressHint = await this.$eth.ens.nameFor(newVal)
+        this.paymentAddressHint = await nameFor(newVal, this.$eth.config.provider)
       }
     }
   },
@@ -474,7 +475,7 @@ export default {
 
     async setPaymentAddress () {
       if (this.invoice.payment_address) {
-        const name = await this.$eth.ens.nameFor(this.invoice.payment_address)
+        const name = await nameFor(this.invoice.payment_address, this.$eth.config.provider)
         if (name) {
           this.paymentAddressInput = name
           this.paymentAddressHint = this.invoice.payment_address
