@@ -138,7 +138,7 @@
             <div class="flex w-full">
               <base-text-input
                 ref="paymentAddressInput"
-                v-model="invoice_.payment_address"
+                v-model="paymentAddressInput"
                 name="paymentAddress"
                 placeholder="Ethereum address or ENS name..."
                 :rules="[isRequired()]"
@@ -163,9 +163,9 @@
                 rel="noreferrer"
               />
             </div>
-            <!-- <p class="absolute text-xs text-gray-400">
+            <p class="absolute text-xs text-gray-400">
               {{ paymentAddressHint }}
-            </p> -->
+            </p>
           </div>
         </div>
         <div class="flex mt-6">
@@ -323,8 +323,8 @@ export default {
       prefillHash: '',
       submitting: false,
       invoice_: {},
-      // paymentAddressInput: '',
-      // paymentAddressHint: '',
+      paymentAddressInput: '',
+      paymentAddressHint: '',
       paymentDialog: false,
       prefillDialog: false,
       error: '',
@@ -387,19 +387,19 @@ export default {
         this.prefillHash = encodeURIComponent(hash)
       },
       deep: true
-    }
+    },
 
-    // async paymentAddressInput (newVal) {
-    //   this.$refs.paymentAddressInput.errors = []
-    //   if (!isEthAddrCheck(newVal)) {
-    //     const address = await this.$eth.ens.addressFor(newVal)
-    //     this.invoice_.payment_address = (address === this.$eth.config.genesis) ? '' : address
-    //     this.paymentAddressHint = this.invoice_.payment_address
-    //   } else {
-    //     this.invoice_.payment_address = newVal
-    //     this.paymentAddressHint = await this.$eth.ens.nameFor(newVal)
-    //   }
-    // }
+    async paymentAddressInput (newVal) {
+      this.$refs.paymentAddressInput.errors = []
+      if (!isEthAddrCheck(newVal)) {
+        const address = await this.$eth.ens.addressFor(newVal)
+        this.invoice_.payment_address = (address === this.$eth.config.genesis) ? '' : address
+        this.paymentAddressHint = this.invoice_.payment_address
+      } else {
+        this.invoice_.payment_address = newVal
+        this.paymentAddressHint = await this.$eth.ens.nameFor(newVal)
+      }
+    }
   },
 
   beforeMount () {
@@ -408,7 +408,7 @@ export default {
     if (!this.invoice_.token_id) {
       this.invoice_.token_id = this.tokens.find(t => t.code === 'ETH').id
     }
-    // this.setPaymentAddress()
+    this.setPaymentAddress()
   },
 
   methods: {
@@ -469,19 +469,19 @@ export default {
 
     tokenChangeHandler (newTokenId) {
       this.invoice_.token_id = newTokenId
-    }
+    },
 
-    // async setPaymentAddress () {
-    //   if (this.invoice.payment_address) {
-    //     const name = await this.$eth.ens.nameFor(this.invoice.payment_address)
-    //     if (name) {
-    //       this.paymentAddressInput = name
-    //       this.paymentAddressHint = this.invoice.payment_address
-    //     } else {
-    //       this.paymentAddressInput = this.invoice.payment_address
-    //     }
-    //   }
-    // }
+    async setPaymentAddress () {
+      if (this.invoice.payment_address) {
+        const name = await this.$eth.ens.nameFor(this.invoice.payment_address)
+        if (name) {
+          this.paymentAddressInput = name
+          this.paymentAddressHint = this.invoice.payment_address
+        } else {
+          this.paymentAddressInput = this.invoice.payment_address
+        }
+      }
+    }
   }
 }
 </script>
