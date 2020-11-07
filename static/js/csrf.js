@@ -1,6 +1,6 @@
 window.onload = function () {
   const cookies = cookieParser(document.cookie)
-  if (!cookies['CSRF-TOKEN']) {
+  if (!cookies['CSRF-TOKEN'] && this.$nuxt) {
     this.$nuxt.$axios.$get('/')
   }
 }
