@@ -1,8 +1,8 @@
 import ENS, { getEnsAddress } from '@ensdomains/ensjs'
 
 export default class Ens {
-  constructor ({ web3 }) {
-    this.instance = new ENS({ provider: web3.givenProvider, ensAddress: getEnsAddress('1') })
+  constructor ({ provider }) {
+    this.instance = new ENS({ provider, ensAddress: getEnsAddress('1') })
   }
 
   async addressFor (name) {

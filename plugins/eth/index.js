@@ -10,7 +10,7 @@ import Ens from './ens'
 
 export default (_, inject) => {
   const web3 = new Web3(Web3.givenProvider)
-  const config = { web3, genesis: '0x0000000000000000000000000000000000000000' }
+  const config = { web3, provider: Web3.givenProvider, genesis: '0x0000000000000000000000000000000000000000' }
 
   inject('eth', {
     config,
