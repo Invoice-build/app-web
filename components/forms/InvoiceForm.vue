@@ -272,6 +272,7 @@
       </div>
     </div>
     <payment-dialog
+      v-if="!editable"
       :show="paymentDialog"
       :invoice="invoice"
       @close="paymentDialog = false"
