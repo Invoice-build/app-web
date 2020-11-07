@@ -105,9 +105,9 @@ export default {
     }),
 
     setProvider () {
-      // if (!Web3.givenProvider) {
-      //   this.$eth.config.web3 = new Web3(`wss://${this.invoice.network}.infura.io/ws/v3/${this.$config.INFURA_PROJECT_ID}`)
-      // }
+      if (!Web3.givenProvider) {
+        this.$eth.config.web3 = new Web3(`wss://${this.invoice.network}.infura.io/ws/v3/${this.$config.INFURA_PROJECT_ID}`)
+      }
     },
 
     async successHandler () {
