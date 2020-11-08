@@ -2,7 +2,7 @@
   <div>
     <Nuxt v-if="!loading" />
     <app-nav />
-    <!-- <app-snackbars /> -->
+    <app-snackbars />
   </div>
 </template>
 
@@ -10,12 +10,12 @@
 import Web3 from 'web3'
 import { mapActions } from 'vuex'
 import AppNav from '~/components/navs/AppNav.vue'
-// import AppSnackbars from '~/components/alerts/AppSnackbars.vue'
+import AppSnackbars from '~/components/alerts/AppSnackbars.vue'
 
 export default {
   components: {
-    AppNav
-    // AppSnackbars
+    AppNav,
+    AppSnackbars
   },
 
   data () {
