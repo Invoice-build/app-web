@@ -42,7 +42,8 @@ export default {
 
     setProvider () {
       if (!Web3.givenProvider) {
-        this.$eth.config.provider = `wss://${this.invoice.network}.infura.io/ws/v3/${this.$config.INFURA_PROJECT_ID}`
+        const network = !this.invoice ? 'mainnet' : this.invoice.network
+        this.$eth.config.provider = new Web3.providers.WebsocketProvider(`wss://${network}.infura.io/ws/v3/${this.$config.INFURA_PROJECT_ID}`)
         this.$eth.config.web3 = new Web3(this.$eth.config.provider)
       }
     }
