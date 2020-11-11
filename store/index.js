@@ -1,3 +1,1 @@
-export const state = () => ({
-  network: 'mainnet'
-})
+export const state = () => ({})

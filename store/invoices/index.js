@@ -41,18 +41,6 @@ export const actions = {
       throw error.response.data
     }
   }
-
-  // async update ({ commit }, invoice) {
-  //   try {
-  //     const response = await this.$axios.$patch(`/invoices/${invoice.id}`, { invoice })
-  //     commit('setCurrent', response)
-  //     commit('update', response)
-  //     return response
-  //   } catch (error) {
-  //     commit('setCurrent', {})
-  //     throw error.response.data
-  //   }
-  // }
 }
 
 export const mutations = {
