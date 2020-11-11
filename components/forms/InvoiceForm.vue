@@ -47,9 +47,10 @@
           :currency-code="selectedToken.code"
           :editable="editable"
           @change="(newLineItems) => { form.line_items_attributes = newLineItems }"
-          @tax-change="taxBpsUpdateHandler"
+          @tax-change="taxChangeHandler"
         />
         <line-items-table
+          v-else
           v-model="form.line_items_attributes"
           :invoice="form"
           :currency-code="selectedToken.code"
@@ -101,6 +102,7 @@
         :editable="editable"
         :submitting="submitting"
         :submit-error="submitError"
+        :has-pending-tx="hasPendingTx"
         :error="error"
       />
     </div>
@@ -178,11 +180,6 @@ export default {
 
     selectedToken () {
       return this.tokens.find(t => t.id === this.form.token_id)
-    },
-
-    paymentLoadingLabel () {
-      if (this.hasPendingTx) return `${this.$t('labels.confirming')}...`
-      return `${this.$t('labels.submitting')}...`
     }
   },
 

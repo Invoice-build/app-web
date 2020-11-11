@@ -45,7 +45,7 @@
         </span>
       </div>
       <div class="text-right text-xl font-medium mt-4">
-        {{ amountFor(item) | money }} {{ currencyCode }}
+        {{ amountFor(value) | money }} {{ currencyCode }}
       </div>
     </base-card-content>
   </base-card>
