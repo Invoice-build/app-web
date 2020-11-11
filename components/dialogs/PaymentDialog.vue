@@ -112,7 +112,7 @@ export default {
     async initMetaMaskTx () {
       try {
         window.fathom.trackGoal('BCMLWFRH', 0)
-        let network = await this.$eth.network().currentName()
+        const network = await this.$eth.network().currentName()
         if (network !== this.invoice.network) throw new Error(`Please switch to ${this.invoice.network}`)
 
         const tx_hash = await this.$eth.transaction(network).send(
