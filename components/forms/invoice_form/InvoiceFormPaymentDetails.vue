@@ -111,9 +111,9 @@ export default {
     isRequired,
 
     async setPaymentAddress () {
-      this.paymentAddressInput = this.value.payment_address
       try {
         if (this.value.payment_address) {
+          this.paymentAddressInput = this.value.payment_address
           const name = await this.$eth.ens().nameFor(this.value.payment_address)
           if (name) {
             this.paymentAddressInput = name
