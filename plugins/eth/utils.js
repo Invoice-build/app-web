@@ -1,8 +1,6 @@
-export default class Address {
-  constructor ({ web3 }) {
-    this.web3 = web3
-  }
+import Base from './base'
 
+export default class Utils extends Base {
   unitsFromDecimals (decimals) {
     const unitValue = (1 * 10 ** decimals).toString()
     const unitMap = this.web3.utils.unitMap

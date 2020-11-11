@@ -1,24 +1,27 @@
-import Web3 from 'web3'
+import Link from './link'
+import Ens from './ens'
 import Network from './network'
 import Account from './account'
 import Address from './address'
 import Contract from './contract'
-import Link from './link'
 import Transaction from './transaction'
 import Utils from './utils'
 
-export default (_, inject) => {
-  const web3 = new Web3(Web3.givenProvider)
-  const config = { web3, provider: Web3.givenProvider, genesis: '0x0000000000000000000000000000000000000000' }
+export default ({ $config: { infuraProjectId } }, inject) => {
+  const defaults = {
+    network: 'mainnet',
+    genesis: '0x0000000000000000000000000000000000000000'
+  }
 
   inject('eth', {
-    config,
-    network: new Network(config),
-    account: new Account(config),
-    address: new Address(config),
-    contract: new Contract(config),
-    transaction: new Transaction(config),
-    link: new Link(config),
-    utils: new Utils(config)
+    defaults,
+    link: new Link(),
+    ens: (network = defaults.network) => new Ens({ network, infuraProjectId }),
+    network: (network = defaults.network) => new Network({ network, infuraProjectId }),
+    account: (network = defaults.network) => new Account({ network, infuraProjectId }),
+    address: (network = defaults.network) => new Address({ network, infuraProjectId }),
+    contract: (network = defaults.network) => new Contract({ network, infuraProjectId }),
+    transaction: (network = defaults.network) => new Transaction({ network, infuraProjectId }),
+    utils: (network = defaults.network) => new Utils({ network, infuraProjectId })
   })
 }

@@ -1,8 +1,6 @@
-export default class Contract {
-  constructor ({ web3 }) {
-    this.web3 = web3
-  }
+import Base from './base'
 
+export default class Contract extends Base {
   getInstance (abi, address, { options = {} } = {}) {
     return new this.web3.eth.Contract(abi, address, { ...options })
   }

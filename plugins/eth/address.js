@@ -1,11 +1,7 @@
 import Web3 from 'web3'
+import Base from './base'
 
-export default class Address {
-  constructor ({ web3 }) {
-    this.web3 = web3
-    this.genesis = '0x0000000000000000000000000000000000000000'
-  }
-
+export default class Address extends Base {
   async balance (address, { inWei = false } = {}) {
     const weiBalance = await this.web3.eth.getBalance(address)
     return inWei ? weiBalance : Web3.utils.fromWei(weiBalance)

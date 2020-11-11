@@ -1,8 +1,6 @@
-export default class Account {
-  constructor ({ web3 }) {
-    this.web3 = web3
-  }
+import Base from './base'
 
+export default class Account extends Base {
   async fetch () {
     const [account] = await window.ethereum.enable()
     this.current = account

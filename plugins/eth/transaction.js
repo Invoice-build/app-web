@@ -1,14 +1,14 @@
+import Base from './base'
 import Contract from './contract'
 import Network from './network'
 import Utils from './utils'
 
-export default class Transaction {
-  constructor ({ web3, genesis }) {
-    this.web3 = web3
-    this.genesisAddress = genesis
-    this.contract = new Contract({ web3 })
-    this.network = new Network({ web3 })
-    this.utils = new Utils({ web3 })
+export default class Transaction extends Base {
+  constructor (args) {
+    super(args)
+    this.contract = new Contract(args)
+    this.network = new Network(args)
+    this.utils = new Utils(args)
   }
 
   send (from, to, amount, token, { resolveOn = 'hash' } = {}) {

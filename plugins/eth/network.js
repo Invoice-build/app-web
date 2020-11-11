@@ -1,10 +1,10 @@
-import Web3 from 'web3'
 import axios from 'axios'
 import BN from 'bignumber.js'
+import Base from './base'
 
-export default class Network {
-  constructor ({ web3 }) {
-    this.web3 = web3
+export default class Network extends Base {
+  constructor (args) {
+    super(args)
     this.supportedNetworks = [1, 3]
     this.networkMap = {
       1: 'mainnet',
@@ -14,7 +14,7 @@ export default class Network {
   }
 
   hasProvider () {
-    return !!Web3.givenProvider
+    return !!this.provider
   }
 
   async getBlockNumber () {
