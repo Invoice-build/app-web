@@ -122,7 +122,6 @@ export default {
           this.invoice.token
         )
 
-        network = await this.$eth.network.currentName()
         const eth_transaction = { reference: 'payment', network, tx_hash }
         await this.createTx({ invoiceId: this.invoice.id, eth_transaction })
         this.successHandler()
