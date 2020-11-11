@@ -104,6 +104,7 @@
         :submit-error="submitError"
         :has-pending-tx="hasPendingTx"
         :error="error"
+        @signed-tx="$emit('signed-tx')"
       />
     </div>
   </base-form>
