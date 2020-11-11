@@ -81,6 +81,7 @@ export default {
     editable: { type: Boolean, required: true },
     submitting: { type: Boolean, required: true },
     submitError: { type: Boolean, required: true },
+    hasPendingTx: { type: Boolean, default: false },
     error: { type: String, default: '' }
   },
 
@@ -89,6 +90,13 @@ export default {
       prefillHash: '',
       paymentDialog: false,
       prefillDialog: false
+    }
+  },
+
+  computed: {
+    paymentLoadingLabel () {
+      if (this.hasPendingTx) return `${this.$t('labels.confirming')}...`
+      return `${this.$t('labels.submitting')}...`
     }
   },
 
