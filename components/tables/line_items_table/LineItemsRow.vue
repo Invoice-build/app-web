@@ -1,8 +1,8 @@
 <template>
   <tr>
-    <td :class="['text-left p-2', { 'bg-orange-100': (rowIndex % 2 == 0 && !item.description) }]">
+    <td :class="['text-left p-2', { 'bg-orange-100': (rowIndex % 2 == 0 && !value.description) }]">
       <base-text-input
-        v-model="item.description"
+        v-model="value.description"
         placeholder="Item details..."
         :rules="[isRequired()]"
         :disabled="!editable"
@@ -11,9 +11,9 @@
         absolute-error
       />
     </td>
-    <td :class="['text-right p-2', { 'bg-orange-100': (rowIndex % 2 == 0 && !item.quantity) }]">
+    <td :class="['text-right p-2', { 'bg-orange-100': (rowIndex % 2 == 0 && !value.quantity) }]">
       <base-text-input
-        v-model="item.quantity"
+        v-model="value.quantity"
         placeholder="e.g. 1   "
         :rules="quantityRules"
         :disabled="!editable"
@@ -23,9 +23,9 @@
         required
       />
     </td>
-    <td :class="['text-left p-2', { 'bg-orange-100': (rowIndex % 2 == 0 && !item.quantity_type) }]">
+    <td :class="['text-left p-2', { 'bg-orange-100': (rowIndex % 2 == 0 && !value.quantity_type) }]">
       <base-select
-        v-model="item.quantity_type"
+        v-model="value.quantity_type"
         :options="quantityTypes"
         placeholder="Choose..."
         :rules="[isRequired()]"
@@ -36,9 +36,9 @@
         class="w-32"
       />
     </td>
-    <td :class="['text-right p-2', { 'bg-orange-100': (rowIndex % 2 == 0 && !item.unit_price) }]">
+    <td :class="['text-right p-2', { 'bg-orange-100': (rowIndex % 2 == 0 && !value.unit_price) }]">
       <base-text-input
-        v-model="item.unit_price"
+        v-model="value.unit_price"
         placeholder="Price/unit...   "
         :rules="unitPriceRules"
         :disabled="!editable"
@@ -49,7 +49,7 @@
       />
     </td>
     <td class="text-right p-2">
-      {{ amountFor(item) | money }}
+      {{ amountFor(value) | money }}
     </td>
   </tr>
 </template>
@@ -61,7 +61,7 @@ export default {
   name: 'LineItemsRow',
 
   props: {
-    item: { type: Object, required: true },
+    value: { type: Object, required: true },
     editable: { type: Boolean, required: true }
   },
 
@@ -88,6 +88,12 @@ export default {
 
     unitPriceRules () {
       return [isRequired(), isNumber(), isLessThanOrEqualTo(this.maxUnitPrice), maxDecimals(6), isPositive()]
+    }
+  },
+
+  watch: {
+    value () {
+      this.$emit('change', this.value)
     }
   },
 

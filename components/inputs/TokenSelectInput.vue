@@ -46,11 +46,12 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
+
 export default {
   name: 'TokenSelectInput',
 
   props: {
-    tokens: { type: Array, required: true },
     network: { type: String, required: true },
     selected: { type: Object, required: true },
     disabled: { type: Boolean, default: false }
@@ -64,6 +65,10 @@ export default {
   },
 
   computed: {
+    ...mapState({
+      tokens: state => state.tokens.all
+    }),
+
     availableTokens () {
       return this.tokens.filter(token => token !== this.selected_ && token.network === this.network)
     }

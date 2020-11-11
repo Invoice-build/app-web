@@ -24,13 +24,36 @@
       </thead>
       <tbody>
         <line-items-row
-          v-for="(item, i) in lineItems_"
+          v-for="(item, i) in value"
           :key="i"
-          :item="item"
+          v-model="value[i]"
           :editable="editable"
           :class="['bg-white odd:bg-gray-100']"
+          @change="(newItem) => { value[i] = newItem }"
         />
-        <line-items-action-row v-if="editable" :items="lineItems_" />
+        <tr>
+          <td :colspan="value.length > 1 ? 3 : 5" class="blank-slate pt-2" @click="value.push({})">
+            <div class="p-2 flex items-center justify-center bg-white border border-dashed border-gray-400 cursor-pointer text-gray-500 hover:text-green-500 hover:border-green-500 text-sm">
+              <base-icon name="fas fa-plus" />
+              <span class="ml-2">
+                {{ $t('labels.line_item') }}
+              </span>
+            </div>
+          </td>
+          <td
+            v-if="value.length > 1"
+            :colspan="2"
+            class="blank-slate pt-2"
+            @click="value.pop()"
+          >
+            <div class="p-2 flex items-center justify-center bg-white border border-dashed border-gray-400 cursor-pointer text-gray-500 hover:text-red-500 hover:border-red-500 text-sm">
+              <base-icon name="fas fa-minus" />
+              <span class="ml-2">
+                {{ $t('labels.line_item') }}
+              </span>
+            </div>
+          </td>
+        </tr>
         <tr>
           <td class="text-right p-2 pt-8" colspan="4">
             {{ $t('labels.subtotal') }}
@@ -88,18 +111,17 @@
 
 <script>
 import LineItemsRow from './LineItemsRow.vue'
-import LineItemsActionRow from './LineItemsActionRow.vue'
 import { isNumber, isLessThanOrEqualTo, isInt, isPositive } from '~/lib/validations'
 
 export default {
   name: 'LineItemsTable',
 
   components: {
-    LineItemsRow,
-    LineItemsActionRow
+    LineItemsRow
   },
 
   props: {
+    value: { type: Array, required: true },
     invoice: { type: Object, required: true },
     currencyCode: { type: String, required: true },
     editable: { type: Boolean, required: true }
@@ -109,18 +131,18 @@ export default {
     return {
       taxPercentage: 0,
       lineItems_: [],
-      taxBps_: 0,
+      taxBps: 0,
       taxRules: [isNumber(), isLessThanOrEqualTo(100), isInt(), isPositive()]
     }
   },
 
   computed: {
     subtotal () {
-      return this.lineItems_.map(item => this.amountFor(item)).reduce((a, b) => a + b) || 0
+      return this.value.map(item => this.amountFor(item)).reduce((a, b) => a + b) || 0
     },
 
     taxAmount () {
-      return this.subtotal * (this.taxBps_ / 10000)
+      return this.subtotal * (this.taxBps / 10000)
     },
 
     total () {
@@ -129,25 +151,24 @@ export default {
   },
 
   watch: {
-    lineItems_: {
+    value: {
       handler (newVal) {
-        this.$emit('line-item-change', newVal)
+        this.$emit('change', newVal)
       },
       deep: true
     },
 
     taxPercentage (newVal) {
-      this.taxBps_ = newVal * 100
+      this.taxBps = newVal * 100
     },
 
-    taxBps_ (newVal) {
-      this.$emit('tax-bps-change', newVal)
+    taxBps (newVal) {
+      this.$emit('tax-change', newVal)
     }
   },
 
   beforeMount () {
-    this.lineItems_ = this.invoice.line_items_attributes.map(lineItem => Object.assign({}, lineItem))
-    this.taxBps_ = this.invoice.tax_bps
+    this.taxBps = this.invoice.tax_bps
   },
 
   methods: {

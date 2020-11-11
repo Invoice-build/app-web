@@ -5,7 +5,7 @@
     </base-card-title>
     <base-card-content>
       <base-text-input
-        v-model="item.description"
+        v-model="value.description"
         :label="$t('labels.description')"
         :required="rowIndex == 0"
         :rules="rowIndex == 0 ? [isRequired()] : []"
@@ -13,7 +13,7 @@
         class="mb-2"
       />
       <base-text-input
-        v-model="item.quantity"
+        v-model="value.quantity"
         :label="$t('labels.units')"
         placeholder="e.g. 1"
         :required="rowIndex == 0"
@@ -22,7 +22,7 @@
         class="mb-2"
       />
       <base-select
-        v-model="item.quantity_type"
+        v-model="value.quantity_type"
         :options="quantityTypes"
         :label="$t('labels.unit_type')"
         placeholder="Choose..."
@@ -33,7 +33,7 @@
       />
       <div class="flex items-end">
         <base-text-input
-          v-model="item.unit_price"
+          v-model="value.unit_price"
           :label="$t('labels.price_per_unit')"
           :required="rowIndex == 0"
           :rules="unitPriceRules"
@@ -58,7 +58,7 @@ export default {
   name: 'LineItemCard',
 
   props: {
-    item: { type: Object, required: true },
+    value: { type: Object, required: true },
     currencyCode: { type: String, required: true },
     editable: { type: Boolean, required: true }
   },
@@ -90,6 +90,12 @@ export default {
       const rules = [isNumber(), isLessThanOrEqualTo(this.maxUnitPrice), maxDecimals(6), isPositive()]
       if (this.rowIndex === 0) rules.unshift(isRequired())
       return rules
+    }
+  },
+
+  watch: {
+    value () {
+      this.$emit('change', this.value)
     }
   },
 

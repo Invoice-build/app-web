@@ -1,7 +1,7 @@
 <template>
   <div class="py-0 md:py-16">
     <div class="invoice-container mx-auto">
-      <invoice-form :invoice="invoice" :editable="true" @saved="successHandler" />
+      <invoice-form :editable="true" @saved="successHandler" />
     </div>
   </div>
 </template>
@@ -19,23 +19,7 @@ export default {
   data () {
     return {
       editable: true,
-      prefillHash: '',
-      invoice: {
-        number: null,
-        token_id: null,
-        due_at: null,
-        description: null,
-        tax_bps: 0,
-        payment_address: null,
-        network: 'mainnet',
-        line_items_attributes: [{}],
-        issuer_contact_attributes: {
-          address_attributes: {}
-        },
-        client_contact_attributes: {
-          address_attributes: {}
-        }
-      }
+      prefillHash: ''
     }
   },
 

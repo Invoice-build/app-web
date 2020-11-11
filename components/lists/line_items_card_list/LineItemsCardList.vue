@@ -1,15 +1,16 @@
 <template>
   <div>
     <line-item-card
-      v-for="(item, i) in lineItems_"
+      v-for="(item, i) in value"
       :key="i"
-      :item="item"
+      v-model="value[i]"
       :currency-code="currencyCode"
       :editable="editable"
       class="mt-2"
+      @change="(newItem) => { value[i] = newItem }"
     />
     <div v-if="editable" class="flex -mx-2 mt-2">
-      <div :class="['blank-slate pt-2 mx-2', (lineItems_.length === 1 ? 'w-full' : 'w-1/2 md:w-2/3')]" @click="lineItems_.push({})">
+      <div :class="['blank-slate pt-2 mx-2', (value.length === 1 ? 'w-full' : 'w-1/2 md:w-2/3')]" @click="value.push({})">
         <div class="p-2 flex items-center justify-center bg-white border border-dashed border-gray-400 cursor-pointer text-gray-500 hover:text-green-500 hover:border-green-500 text-sm">
           <base-icon name="fas fa-plus" />
           <span class="ml-2">
@@ -17,7 +18,7 @@
           </span>
         </div>
       </div>
-      <div v-if="lineItems_.length > 1" class="blank-slate pt-2 w-1/2 md:w-1/3 mx-2" @click="lineItems_.pop()">
+      <div v-if="value.length > 1" class="blank-slate pt-2 w-1/2 md:w-1/3 mx-2" @click="value.pop()">
         <div class="p-2 flex items-center justify-center bg-white border border-dashed border-gray-400 cursor-pointer text-gray-500 hover:text-red-500 hover:border-red-500 text-sm">
           <base-icon name="fas fa-minus" />
           <span class="ml-2">
@@ -90,6 +91,7 @@ export default {
   },
 
   props: {
+    value: { type: Array, required: true },
     invoice: { type: Object, required: true },
     currencyCode: { type: String, required: true },
     editable: { type: Boolean, required: true }
@@ -98,19 +100,18 @@ export default {
   data () {
     return {
       taxPercentage: 0,
-      lineItems_: [],
-      taxBps_: 0,
+      taxBps: 0,
       taxRules: [isNumber(), isLessThanOrEqualTo(100), isInt(), isPositive()]
     }
   },
 
   computed: {
     subtotal () {
-      return this.lineItems_.map(item => this.amountFor(item)).reduce((a, b) => a + b) || 0
+      return this.value.map(item => this.amountFor(item)).reduce((a, b) => a + b) || 0
     },
 
     taxAmount () {
-      return this.subtotal * (this.taxBps_ / 10000)
+      return this.subtotal * (this.taxBps / 10000)
     },
 
     total () {
@@ -119,25 +120,24 @@ export default {
   },
 
   watch: {
-    lineItems_: {
+    value: {
       handler (newVal) {
-        this.$emit('line-item-change', newVal)
+        this.$emit('change', newVal)
       },
       deep: true
     },
 
     taxPercentage (newVal) {
-      this.taxBps_ = newVal * 100
+      this.taxBps = newVal * 100
     },
 
-    taxBps_ (newVal) {
-      this.$emit('tax-bps-change', newVal)
+    taxBps (newVal) {
+      this.$emit('tax-change', newVal)
     }
   },
 
   beforeMount () {
-    this.lineItems_ = this.invoice.line_items_attributes.map(lineItem => Object.assign({}, lineItem))
-    this.taxBps_ = this.invoice.tax_bps
+    this.taxBps = this.invoice.tax_bps
   },
 
   methods: {

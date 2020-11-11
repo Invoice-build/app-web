@@ -112,11 +112,11 @@ export default {
     async initMetaMaskTx () {
       try {
         window.fathom.trackGoal('BCMLWFRH', 0)
-        let network = await this.$eth.network.currentName()
+        let network = await this.$eth.network().currentName()
         if (network !== this.invoice.network) throw new Error(`Please switch to ${this.invoice.network}`)
 
-        const tx_hash = await this.$eth.transaction.send(
-          (await this.$eth.account.fetch()),
+        const tx_hash = await this.$eth.transaction(network).send(
+          (await this.$eth.account(network).fetch()),
           this.invoice.payment_address,
           this.invoice.total - this.invoice.paid_amount,
           this.invoice.token
@@ -140,7 +140,7 @@ export default {
 
     async sendWcTx () {
       try {
-        const tx = await this.$eth.transaction.walletConnectTxObject(
+        const tx = await this.$eth.transaction(this.invoice.network).walletConnectTxObject(
           this.walletConnect.accounts[0],
           this.invoice.payment_address,
           this.invoice.total - this.invoice.paid_amount,
@@ -166,7 +166,7 @@ export default {
             throw error
           }
           const { accounts, chainId } = payload.params[0]
-          this.walletConnect.network = this.$eth.network.networkMap[chainId]
+          this.walletConnect.network = this.$eth.network().networkMap[chainId]
           this.walletConnect.accounts = accounts
           if (this.walletConnect.network !== this.invoice.network) throw new Error(`Please switch to ${this.invoice.network}`)
           this.sendWcTx()
@@ -178,7 +178,7 @@ export default {
             throw error
           }
           const { accounts, chainId } = payload.params[0]
-          this.walletConnect.network = this.$eth.network.networkMap[chainId]
+          this.walletConnect.network = this.$eth.network().networkMap[chainId]
           this.walletConnect.accounts = accounts
           if (this.walletConnect.network !== this.invoice.network) throw new Error(`Please switch to ${this.invoice.network}`)
         })
