@@ -49,7 +49,6 @@ export default {
     parsePrefill () {
       try {
         this.prefillHash = decodeURI(this.$route.query.prefill)
-        console.log(this.prefillHash)
         if (this.prefillHash !== 'undefined') {
           const bytes = CryptoJS.AES.decrypt(this.prefillHash, 'invoice.build')
           const prefillData = JSON.parse(bytes.toString(CryptoJS.enc.Utf8))
