@@ -1,5 +1,6 @@
 import nuxtI18nConfig from './lib/nuxt-i18n-config'
-import { title, description, ogMeta } from './lib/meta'
+import { title, ogMeta } from './lib/meta'
+import getContentRoutes from './lib/get-content-routes'
 
 export default {
   target: 'server',
@@ -21,8 +22,7 @@ export default {
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0, initial-scale=1, minimal-ui, shrink-to-fit=no' },
-      { hid: 'description', name: 'description', content: description },
-      ...ogMeta
+      ...ogMeta()
     ],
     link: [
       { rel: 'apple-touch-icon', href: '/apple-touch-icon.png', sizes: '180x180' },
@@ -59,8 +59,22 @@ export default {
   modules: [
     '@nuxtjs/axios',
     '@nuxtjs/sentry',
+    '@nuxt/content',
+    '@nuxtjs/sitemap',
     ['nuxt-i18n', nuxtI18nConfig]
   ],
+
+  sitemap: {
+    path: '/sitemap.xml',
+    hostname: 'https://invoice.build',
+    cacheTime: 1000 * 60 * 15,
+    gzip: true,
+    generate: false,
+    exclude: [],
+    routes () {
+      return getContentRoutes()
+    }
+  },
 
   sentry: {
     dsn: 'https://f3efaf39aa4a4e9992315a7f3f267d36@o473092.ingest.sentry.io/5507615'
