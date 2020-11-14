@@ -57,7 +57,8 @@
     "description": "Description",
     "price_per_unit": "Price/unit",
     "new_invoice": "New invoice",
-    "any_additional_info": "Any additional information"
+    "any_additional_info": "Any additional information",
+    "legal": "Legal"
   },
   "hints": {
     "password": "Invoice payment pages are publically accessible by default, to make it private set a password."
