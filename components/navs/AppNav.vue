@@ -44,7 +44,8 @@ export default {
         { label: this.$t('labels.about'), icon: 'fas fa-info-circle', url: 'https://garethfullers.site/blog/im-open-sourcing-my-next-side-project/', targetBlank: true },
         { label: this.$t('labels.code'), icon: 'fas fa-code', url: 'https://github.com/Invoice-build', targetBlank: true },
         { label: this.$t('labels.roadmap'), icon: 'fas fa-road', url: 'https://trello.com/b/RKj2K6Hz', targetBlank: true },
-        { label: this.$t('labels.analytics'), icon: 'fas fa-chart-bar', url: 'https://app.usefathom.com/share/qktowsha/invoice.build', targetBlank: true }
+        { label: this.$t('labels.analytics'), icon: 'fas fa-chart-bar', url: 'https://app.usefathom.com/share/qktowsha/invoice.build', targetBlank: true },
+        { label: this.$t('labels.legal'), icon: 'fas fa-balance-scale', url: '/legal', targetBlank: false }
       ]
     }
   },
