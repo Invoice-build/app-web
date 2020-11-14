@@ -29,6 +29,9 @@ module.exports = {
         allowFirstLine: false
       }
     }],
+    'vue/singleline-html-element-content-newline': ['warn', {
+      ignores: ["nuxt-link", "span"]
+    }],
     'vue/component-tags-order': ['warn', {
       order: ['template', 'script', 'style']
     }],
