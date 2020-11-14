@@ -18,8 +18,10 @@
   },
   "dependencies": {
     "@ensdomains/ensjs": "^0.2.0",
+    "@nuxt/content": "^1.10.0",
     "@nuxtjs/axios": "^5.12.2",
     "@nuxtjs/sentry": "^4.4.0",
+    "@nuxtjs/sitemap": "^2.4.0",
     "@walletconnect/client": "^1.2.1",
     "@walletconnect/qrcode-modal": "^1.2.1",
     "crypto-js": "^4.0.0",
