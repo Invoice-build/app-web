@@ -6,19 +6,26 @@
       class="nav-box w-64 bg-white shadow-2xl fixed bottom-0 z-50 right-0 mr-2 md:mr-6 mb-2 md:mb-6 rounded flex flex-col"
     >
       <div class="flex flex-col flex-1 py-2">
-        <a
-          v-for="(item, i) in menuItems"
-          :key="i"
-          :href="item.url"
-          class="flex text-gray-700 px-4 py-2 hover:bg-black hover:text-white"
-          :target="item.targetBlank ? '_blank' : '_self'"
-          rel="noreferrer"
-        >
-          <div class="w-8">
-            <i :class="item.icon" />
-          </div>
-          <span>{{ item.label }}</span>
-        </a>
+        <div v-for="(item, i) in menuItems" :key="i">
+          <a
+            v-if="item.external"
+            :href="item.url"
+            target="_blank"
+            rel="noreferrer"
+            class="flex text-gray-700 px-4 py-2 hover:bg-black hover:text-white"
+          >
+            <div class="w-8">
+              <i :class="item.icon" />
+            </div>
+            <span>{{ item.label }}</span>
+          </a>
+          <nuxt-link v-else :to="item.url" class="flex text-gray-700 px-4 py-2 hover:bg-black hover:text-white">
+            <div class="w-8">
+              <i :class="item.icon" />
+            </div>
+            <span>{{ item.label }}</span>
+          </nuxt-link>
+        </div>
       </div>
       <div class="h-20 w-full bg-black nav-box-footer" />
     </div>
@@ -44,12 +51,12 @@ export default {
       showBtn: true,
       showMenu: false,
       menuItems: [
-        { label: this.$t('labels.new_invoice'), icon: 'fas fa-plus', url: '/', targetBlank: false },
-        { label: this.$t('labels.about'), icon: 'fas fa-info-circle', url: 'https://garethfullers.site/blog/im-open-sourcing-my-next-side-project/', targetBlank: true },
-        { label: this.$t('labels.code'), icon: 'fas fa-code', url: 'https://github.com/Invoice-build', targetBlank: true },
-        { label: this.$t('labels.roadmap'), icon: 'fas fa-road', url: 'https://trello.com/b/RKj2K6Hz', targetBlank: true },
-        { label: this.$t('labels.analytics'), icon: 'fas fa-chart-bar', url: 'https://app.usefathom.com/share/qktowsha/invoice.build', targetBlank: true },
-        { label: this.$t('labels.legal'), icon: 'fas fa-balance-scale', url: '/legal', targetBlank: false }
+        { label: this.$t('labels.new_invoice'), icon: 'fas fa-plus', url: '/', external: false },
+        { label: this.$t('labels.about'), icon: 'fas fa-info-circle', url: 'https://garethfullers.site/blog/im-open-sourcing-my-next-side-project/', external: true },
+        { label: this.$t('labels.code'), icon: 'fas fa-code', url: 'https://github.com/Invoice-build', external: true },
+        { label: this.$t('labels.roadmap'), icon: 'fas fa-road', url: 'https://trello.com/b/RKj2K6Hz', external: true },
+        { label: this.$t('labels.analytics'), icon: 'fas fa-chart-bar', url: 'https://app.usefathom.com/share/qktowsha/invoice.build', external: true },
+        { label: this.$t('labels.legal'), icon: 'fas fa-balance-scale', url: '/legal', external: false }
       ]
     }
   },
