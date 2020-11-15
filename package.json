@@ -28,6 +28,7 @@
     "nuxt": "^2.13.0",
     "nuxt-i18n": "^6.13.1",
     "v-click-outside": "^3.1.2",
+    "v-hotkey": "^0.8.0",
     "vue-click-outside": "^1.1.0",
     "vue-mq": "^1.0.1",
     "web3": "^1.2.11"

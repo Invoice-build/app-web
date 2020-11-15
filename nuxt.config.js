@@ -49,6 +49,7 @@ export default {
     '~/plugins/globals',
     '~/plugins/utils',
     '~/plugins/breakpoints',
+    '~/plugins/v-hotkey',
     { src: '~/plugins/eth', ssr: false },
     { src: "~/plugins/v-click-outside", ssr: false }
   ],
