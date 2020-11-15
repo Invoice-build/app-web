@@ -47,9 +47,10 @@ export default {
   plugins: [
     '~/plugins/axios',
     '~/plugins/globals',
-    { src: '~/plugins/eth', ssr: false },
     '~/plugins/utils',
-    '~/plugins/breakpoints'
+    '~/plugins/breakpoints',
+    { src: '~/plugins/eth', ssr: false },
+    { src: "~/plugins/v-click-outside", ssr: false }
   ],
 
   components: [
