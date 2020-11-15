@@ -1,6 +1,6 @@
 <template>
   <base-dialog :show="show" @close="$emit('close'); error = ''">
-    <base-card square class="w-full sm:w-2/3 md:w-2/5 lg:w-1/3 mx-auto rounded-t sm:rounded">
+    <base-card square class="dialog-card w-full mx-auto rounded-t sm:rounded">
       <base-card-title v-if="!success" :title="$t('dialogs.payment.title')" />
       <transition name="success">
         <base-card-content v-if="success" class="flex flex-col justify-center items-center text-center">
@@ -197,6 +197,10 @@ export default {
 </script>
 
 <style lang="css">
+.dialog-card {
+  max-width: 500px;
+}
+
 .wallet-btn {
   transition: all .2s ease;
 }

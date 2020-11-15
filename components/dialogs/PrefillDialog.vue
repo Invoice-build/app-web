@@ -1,6 +1,6 @@
 <template>
   <base-dialog :show="show" @close="$emit('close')">
-    <base-card square class="w-full sm:w-2/3 md:w-2/5 lg:w-1/3 mx-auto rounded-t sm:rounded">
+    <base-card square class="dialog-card w-full mx-auto rounded-t sm:rounded">
       <base-card-title :title="$t('dialogs.prefill.title')" />
       <base-card-content>
         <p>
@@ -66,3 +66,9 @@ export default {
   }
 }
 </script>
+
+<style lang="css">
+.dialog-card {
+  max-width: 500px;
+}
+</style>
