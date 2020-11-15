@@ -1,5 +1,10 @@
 <template>
-  <div v-if="show" class="top-0 left-0 fixed h-screen w-full z-50" @click="hide" v-hotkey="keymap">
+  <div
+    v-if="show"
+    v-hotkey="keymap"
+    class="top-0 left-0 fixed h-screen w-full z-50"
+    @click="hide"
+  >
     <transition name="dialog-bg" mode="out-in" appear>
       <div v-if="showContent" class="absolute h-full w-full bg-black bg-opacity-50" />
     </transition>
@@ -32,17 +37,17 @@ export default {
     }
   },
 
-  watch: {
-    show (newVal) {
-      this.showContent = newVal
-    }
-  },
-
   computed: {
     keymap () {
       return {
         esc: this.hide
       }
+    }
+  },
+
+  watch: {
+    show (newVal) {
+      this.showContent = newVal
     }
   },
 

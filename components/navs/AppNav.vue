@@ -3,7 +3,8 @@
     <div
       v-if="showMenu"
       v-click-outside="() => { showMenu = false }"
-      class="nav-box w-64 bg-white shadow-2xl fixed bottom-0 z-50 right-0 mr-2 md:mr-6 mb-2 md:mb-6 rounded flex flex-col">
+      class="nav-box w-64 bg-white shadow-2xl fixed bottom-0 z-50 right-0 mr-2 md:mr-6 mb-2 md:mb-6 rounded flex flex-col"
+    >
       <div class="flex flex-col flex-1 py-2">
         <a
           v-for="(item, i) in menuItems"
