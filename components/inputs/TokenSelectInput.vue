@@ -26,12 +26,6 @@
               <span class="text-base text-gray-700 font-medium ml-5">{{ token.code }}</span>
             </li>
           </ul>
-          <div class="border-t border-gray-200 leading-none text-sm p-4 text-center">
-            <span class="text-gray-700">
-              <span class="text-green-500 underline">{{ $t('labels.signup') }}</span>
-              <span class="downcase">{{ $t('statements.custom_tokens') }}</span>
-            </span>
-          </div>
         </div>
       </div>
     </transition>
