@@ -1,13 +1,14 @@
 <template>
   <div class="mt-12">
-    <a
+    <base-btn
       v-if="editable"
-      href=""
-      class="text-xs text-gray-500 hover:text-blue-500"
+      icon="fas fa-share"
+      color="gray"
+      class="mb-2"
+      circle
+      flat
       @click.prevent="prefillDialog = true"
-    >
-      {{ $t('actions.share_prefilled_invoice') }}
-    </a>
+    />
     <base-btn
       v-if="editable"
       type="submit"
