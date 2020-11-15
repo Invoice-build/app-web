@@ -12,6 +12,7 @@
     <base-btn
       v-if="editable"
       type="submit"
+      size="lg"
       :color="submitError ? 'red' : 'black'"
       :loading="submitting"
       :loading-label="`${$t('labels.creating')}...`"
