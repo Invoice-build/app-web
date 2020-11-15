@@ -10,7 +10,7 @@
         appear
         @after-leave="$emit('close')"
       >
-        <div v-if="showContent" class="relative w-full" @click.stop>
+        <div v-if="showContent" class="relative w-full content-container" @click.stop>
           <slot />
         </div>
       </transition>
@@ -41,6 +41,10 @@ export default {
 </script>
 
 <style lang="css" scoped>
+.content-container {
+  max-width: 500px;
+}
+
 .content-enter-active {
   transition: all .2s ease-in-out;
 }
