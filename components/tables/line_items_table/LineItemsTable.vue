@@ -31,7 +31,7 @@
           :class="['bg-white odd:bg-gray-100']"
           @change="(newItem) => { value[i] = newItem }"
         />
-        <tr>
+        <tr v-if="editable">
           <td :colspan="value.length > 1 ? 3 : 5" class="blank-slate pt-2" @click="value.push({})">
             <div class="p-2 flex items-center justify-center bg-white border border-dashed border-gray-400 cursor-pointer text-gray-500 hover:text-green-500 hover:border-green-500 text-sm">
               <base-icon name="fas fa-plus" />
