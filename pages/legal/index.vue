@@ -51,9 +51,9 @@
           Policies:
         </span>
         <div>
-          <nuxt-link to="/legal/terms">Terms &amp; Conditions</nuxt-link>
+          <nuxt-link to="/legal/terms" class="link">Terms &amp; Conditions</nuxt-link>
           |
-          <nuxt-link to="/legal/terms">Privacy Policy</nuxt-link>
+          <nuxt-link to="/legal/terms" class="link">Privacy Policy</nuxt-link>
         </div>
       </div>
     </article>

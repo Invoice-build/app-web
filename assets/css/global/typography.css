@@ -1,7 +1,6 @@
-a {
+.link {
   @apply text-blue-500;
 }
-
-a:hover {
+.link:hover {
   @apply underline;
 }

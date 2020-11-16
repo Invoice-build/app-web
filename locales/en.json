@@ -58,7 +58,10 @@
     "price_per_unit": "Price/unit",
     "new_invoice": "New invoice",
     "any_additional_info": "Any additional information",
-    "legal": "Legal"
+    "legal": "Legal",
+    "payments": "Payments",
+    "payment": "Payment",
+    "hash": "Hash"
   },
   "hints": {
     "password": "Invoice payment pages are publically accessible by default, to make it private set a password."
@@ -70,7 +73,8 @@
     "create_this_invoice": "Create this invoice",
     "save_this_invoice": "Save this invoice",
     "pay_this_invoice": "Pay this invoice",
-    "share_prefilled_invoice": "Share prefilled invoice"
+    "share_prefilled_invoice": "Share prefilled invoice",
+    "view_on_etherscan": "View on Etherscan"
   },
   "alerts": {
     "invoice_created": "Invoice created!"

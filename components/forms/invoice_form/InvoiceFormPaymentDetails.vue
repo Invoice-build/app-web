@@ -86,6 +86,8 @@ export default {
 
   watch: {
     async paymentAddressInput (newVal) {
+      if (!this.editable) return
+
       this.$refs.paymentAddressInput.errors = []
       if (!isEthAddrCheck(newVal)) {
         const address = await this.$eth.ens().addressFor(newVal)

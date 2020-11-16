@@ -10,4 +10,8 @@ export default class Address extends Base {
   areEqual (a1, a2) {
     return a1 && a2 && a1.toLowerCase() === a2.toLowerCase()
   }
+
+  toMixedCase (address) {
+    return this.web3.utils.toChecksumAddress(address)
+  }
 }

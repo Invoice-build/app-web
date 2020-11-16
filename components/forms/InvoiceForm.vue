@@ -91,7 +91,7 @@
       <div v-if="hasTransactions" class="mt-12">
         <div class="border-b border-gray-300">
           <h2 class="text-xl font-medium text-gray-600">
-            {{ $t('labels.transactions') }}
+            {{ $t('labels.payments') }}
           </h2>
         </div>
         <transaction-list :transactions="transactions" class="mt-4" />

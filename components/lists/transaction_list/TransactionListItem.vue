@@ -1,73 +1,79 @@
 <template>
   <div :class="['flex border rounded p-2', borderClass, bgClass, textClass]">
-    <div class="mr-2">
+    <div class="mr-4">
       <div :class="['w-6 h-6 flex items-center justify-center rounded-full', bgLightClass]">
         <i :class="[icon, iconColor]" />
       </div>
     </div>
-    <div class="min-w-0 flex flex-col">
-      <div class="truncate">
+    <div class="flex flex-1 justify-between mt-px">
+      <div v-if="!tx.finalized" class="truncate">
         {{ tx.tx_hash }}
       </div>
-      <div v-if="tx.finalized && tx.details" class="h-4 w-px bg-green-200" />
-      <div v-if="tx.finalized && tx.details" class="flex">
-        <div class="h-px w-4 bg-green-200" />
-        <div class="-mt-3 ml-2 flex flex-col md:flex-row">
-          <span v-if="!tx.transactable_valid" class="mr-2">
-            <i class="fas fa-ban" />
+      <div v-else class="flex flex-col md:flex-row">
+        <span v-if="!tx.transactable_valid" class="mr-2">
+          <i class="fas fa-ban" />
+        </span>
+        <span class="font-bold text-xl leading-none mr-2">
+          {{ tx.details.amount | money }} {{ tx.token.code }}
+        </span>
+        <div class="flex tuncate mr-2 mt-2 md:mt-0">
+          <span class="opacity-50 mr-2 lowercase">
+            {{ $t('labels.from') }}
           </span>
-          <div class="flex">
-            <span class="font-bold mr-2">
-              {{ tx.details.amount | money }}
-            </span>
-            <span class="font-bold mr-2">
-              {{ tx.token.code }}
-            </span>
-          </div>
-          <div class="flex tuncate">
-            <span class="opacity-50 mr-2 lowercase">
-              {{ $t('labels.from') }}
-            </span>
-            <span class="truncate min-w-0 w-32 mr-2 hover:underline">
-              <a :href="$eth.link.address(tx.details.from, { network: tx.network })" target="_blank" rel="noreferrer">
-                {{ tx.details.from }}
-              </a>
-            </span>
-          </div>
-          <div class="flex">
-            <span class="opacity-50 mr-2 lowercase">
-              {{ $t('labels.on') }}
-            </span>
-            <span>
-              {{ tx.finalized_at | datetime }}
-            </span>
-          </div>
+          <span>
+            <a
+              :href="$eth.link.address(tx.details.from, { network: tx.network })"
+              target="_blank"
+              rel="noreferrer"
+              :class="[textClass]"
+            >
+              <eth-address :address="tx.details.from" />
+            </a>
+          </span>
+        </div>
+        <div class="flex">
+          <span class="opacity-50 mr-2 lowercase">
+            {{ $t('labels.on') }}
+          </span>
+          <span>
+            {{ tx.finalized_at | datetime }}
+          </span>
         </div>
       </div>
-    </div>
-    <div class="mx-2">
-      <base-copy-btn :text="tx.tx_hash" classes="text-xs" />
-    </div>
-    <div class="flex-1 flex justify-end">
       <base-btn
-        tag="a"
-        icon="fas fa-external-link-square-alt"
+        v-if="tx.finalized"
+        icon="fas fa-expand"
         :color="stateColor"
         size="sm"
-        class="ml-2"
-        flat
         circle
+        flat
+        @click="$emit('expand', tx)"
+      />
+      <base-btn
+        v-else
+        tag="a"
         :href="$eth.link.transaction(tx.tx_hash, { network: tx.network })"
         target="_blank"
         rel="noreferrer"
+        icon="fas fa-external-link-square-alt"
+        :color="stateColor"
+        size="sm"
+        circle
+        flat
       />
     </div>
   </div>
 </template>
 
 <script>
+import EthAddress from '~/components/formatting/EthAddress.vue'
+
 export default {
   name: 'TransactionList',
+
+  components: {
+    EthAddress
+  },
 
   props: {
     tx: { type: Object, required: true }
