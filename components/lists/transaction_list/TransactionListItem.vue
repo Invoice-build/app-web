@@ -25,7 +25,7 @@
               :href="$eth.link.address(tx.details.from, { network: tx.network })"
               target="_blank"
               rel="noreferrer"
-              :class="[textClass]"
+              :class="['hover:underline', textClass]"
             >
               <eth-address :address="tx.details.from" />
             </a>
