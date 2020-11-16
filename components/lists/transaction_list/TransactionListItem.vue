@@ -16,7 +16,7 @@
         <span class="font-bold text-xl leading-none mr-2">
           {{ tx.details.amount | money }} {{ tx.token.code }}
         </span>
-        <div class="flex tuncate mr-2 mt-2 md:mt-0">
+        <div class="flex tuncate mr-2 mt-2 md:mt-0 text-sm">
           <span class="opacity-50 mr-2 lowercase">
             {{ $t('labels.from') }}
           </span>
@@ -31,7 +31,7 @@
             </a>
           </span>
         </div>
-        <div class="flex">
+        <div class="flex text-sm">
           <span class="opacity-50 mr-2 lowercase">
             {{ $t('labels.on') }}
           </span>
