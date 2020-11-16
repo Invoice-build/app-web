@@ -30,6 +30,8 @@ export default {
   },
 
   beforeMount () {
+    this.setInvoice({})
+    this.setTransactions([])
     this.parsePrefill()
     this.parseToken()
   },
@@ -37,7 +39,8 @@ export default {
   methods: {
     ...mapMutations({
       showSnackbar: 'snackbars/setCurrent',
-      setInvoice: 'invoices/setCurrent'
+      setInvoice: 'invoices/setCurrent',
+      setTransactions: 'invoices/eth_transactions/setAll'
     }),
 
     successHandler (invoice) {

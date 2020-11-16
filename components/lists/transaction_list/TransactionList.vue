@@ -43,8 +43,9 @@ export default {
   },
 
   methods: {
-    openDialog (tx) {
+    async openDialog (tx) {
       this.activeTx = tx
+      await this.$nextTick()
       this.showDialog = true
     }
   }

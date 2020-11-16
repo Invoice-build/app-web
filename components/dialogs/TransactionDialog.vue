@@ -11,7 +11,12 @@
             {{ $t('labels.from') }}:
           </div>
           <div class="flex flex-1 items-center justify-between">
-            <a :href="$eth.link.address(transaction.details.from, { network: transaction.network })" target="_blank" rel="noreferrer" class="link">
+            <a
+              :href="$eth.link.address(transaction.details.from, { network: transaction.network })"
+              target="_blank"
+              rel="noreferrer"
+              class="link"
+            >
               <eth-address :address="transaction.details.from" :seg-length="8" />
             </a>
             <div>
@@ -34,7 +39,12 @@
             {{ $t('labels.hash') }}:
           </div>
           <div class="flex flex-1 items-center justify-between">
-            <a :href="$eth.link.transaction(transaction.tx_hash, { network: transaction.network })" target="_blank" rel="noreferrer" class="link">
+            <a
+              :href="$eth.link.transaction(transaction.tx_hash, { network: transaction.network })"
+              target="_blank"
+              rel="noreferrer"
+              class="link"
+            >
               <eth-address :address="transaction.tx_hash" :seg-length="8" hash />
             </a>
             <div>
