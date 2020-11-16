@@ -1,7 +1,7 @@
 <template>
   <div class="w-full fixed bottom-0 flex justify-center">
     <transition name="content" mode="out-in">
-      <div v-if="snackbar" :class="['w-full md:w-1/3 rounded-t-xl shadow-lg font-medium', typeClasses]">
+      <div v-if="snackbar" :class="['snackbar w-full rounded-t-xl shadow-lg font-medium', typeClasses]">
         <div class="relative">
           <div
             class="absolute top-0 right-0 w-6 h-6 flex items-center justify-center rounded-full bg-white bg-opacity-25 cursor-pointer m-1"
@@ -59,6 +59,10 @@ export default {
 </script>
 
 <style lang="css" scoped>
+.snackbar {
+  max-width: 500px;
+}
+
 .content-enter-active {
   transition: all .3s ease-in-out;
 }
