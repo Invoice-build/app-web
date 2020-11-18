@@ -1,0 +1,26 @@
+.nuxt-content h1,
+.nuxt-content h2,
+.nuxt-content h3,
+.nuxt-content h4,
+.nuxt-content h5 { @apply font-bold leading-tight; }
+
+.nuxt-content h2,
+.nuxt-content h3,
+.nuxt-content h4,
+.nuxt-content h5 { @apply mt-8 mb-2; }
+
+.nuxt-content h1 { @apply text-3xl mb-8; }
+.nuxt-content h2 { @apply text-2xl; }
+.nuxt-content h3 { @apply text-xl; }
+.nuxt-content h4 { @apply text-lg; }
+.nuxt-content h5 { @apply text-base; }
+
+.nuxt-content p { @apply text-base mb-4; }
+.nuxt-content a { @apply text-blue-500; }
+
+.nuxt-content ol { @apply list-decimal ml-8 mb-6 text-base; }
+.nuxt-content ul { @apply list-disc ml-8 mb-6 text-base; }
+.nuxt-content li { @apply mb-3; }
+.nuxt-content li img { @apply my-2; }
+
+.nuxt-content img { @apply my-4 rounded; }

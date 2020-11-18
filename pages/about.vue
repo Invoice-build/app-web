@@ -1,9 +1,6 @@
 <template>
   <main class="p-4">
     <article class="w-full md:w-2/3 lg:w-1/2">
-      <span class="text-sm text-gray-400">
-        Updated {{ page.modifiedAt }}
-      </span>
       <nuxt-content :document="page" />
     </article>
   </main>
@@ -18,7 +15,7 @@ export default {
   async asyncData ({ $content, route }) {
     let page
     try {
-      page = await $content(`legal/${route.params.slug}`).fetch()
+      page = await $content('about').fetch()
     } catch (error) {
       return error({ statusCode: 404, message: 'Page not found' })
     }
@@ -30,8 +27,8 @@ export default {
       title: this.page.title,
       meta: ogMeta({
         title: this.page.title,
-        description: '',
-        url: `https://invoice.build/legal/${this.page.slug}`
+        description: 'Invoice.build is an invoice builder for Ethereum tokens. It makes creating an issuing invoices in Ethereum and a selection of Ethereum based stablecoins extremely simple.',
+        url: `https://invoice.build/${this.page.slug}`
       })
     }
   }
