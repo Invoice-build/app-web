@@ -4,7 +4,7 @@ title: About Invoice.build
 
 # About Invoice.build
 
-👋 Hi, my name is Gareth Fuller, I am the founder / creator of invoice.build.
+👋 Hi, my name is [Gareth Fuller](https://twitter.com/garethafuller), I am the founder / creator of invoice.build.
 
 As is fairly obvious from the home page, Invoice.build is an invoice builder for Ethereum tokens. It makes creating an issuing invoices in Ethereum and a selection of Ethereum based stablecoins extremely simple. The resulting invoice payment pages can then be paid off with a variety of Web3 wallets.
 
