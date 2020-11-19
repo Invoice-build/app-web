@@ -2,13 +2,14 @@
   <div class="mt-12">
     <base-btn
       v-if="editable"
-      icon="fas fa-share"
       color="gray"
       class="mb-2"
-      circle
+      size="sm"
       flat
       @click.prevent="prefillDialog = true"
-    />
+    >
+      <i class="fas fa-share" />
+    </base-btn>
     <base-btn
       v-if="editable"
       type="submit"
