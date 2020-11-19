@@ -61,7 +61,8 @@
     "legal": "Legal",
     "payments": "Payments",
     "payment": "Payment",
-    "hash": "Hash"
+    "hash": "Hash",
+    "item_details": "Item details"
   },
   "hints": {
     "password": "Invoice payment pages are publically accessible by default, to make it private set a password."

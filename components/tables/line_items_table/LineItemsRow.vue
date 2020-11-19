@@ -1,17 +1,22 @@
 <template>
   <tr>
-    <td :class="['text-left p-2', { 'bg-orange-100': (rowIndex % 2 == 0 && !value.description) }]">
-      <base-text-input
+    <td :class="['text-left p-2 align-top', { 'bg-orange-100': (rowIndex % 2 == 0 && !value.description) }]">
+      <base-textarea
+        v-if="editable"
         v-model="value.description"
-        placeholder="Item details..."
+        :placeholder="`${$t('labels.item_details')}...`"
         :rules="[isRequired()]"
-        :disabled="!editable"
         :mb="0"
+        rows="1"
+        cols="30"
         required
         absolute-error
       />
+      <div v-else>
+        {{ value.description }}
+      </div>
     </td>
-    <td :class="['text-right p-2', { 'bg-orange-100': (rowIndex % 2 == 0 && !value.quantity) }]">
+    <td :class="['text-right p-2 align-top', { 'bg-orange-100': (rowIndex % 2 == 0 && !value.quantity) }]">
       <base-text-input
         v-model="value.quantity"
         placeholder="e.g. 1   "
@@ -23,7 +28,7 @@
         required
       />
     </td>
-    <td :class="['text-left p-2', { 'bg-orange-100': (rowIndex % 2 == 0 && !value.quantity_type) }]">
+    <td :class="['text-left p-2 align-top', { 'bg-orange-100': (rowIndex % 2 == 0 && !value.quantity_type) }]">
       <base-select
         v-model="value.quantity_type"
         :options="quantityTypes"
@@ -36,10 +41,10 @@
         class="w-32"
       />
     </td>
-    <td :class="['text-right p-2', { 'bg-orange-100': (rowIndex % 2 == 0 && !value.unit_price) }]">
+    <td :class="['text-right p-2 align-top', { 'bg-orange-100': (rowIndex % 2 == 0 && !value.unit_price) }]">
       <base-text-input
         v-model="value.unit_price"
-        placeholder="Price/unit...   "
+        placeholder="e.g. 1"
         :rules="unitPriceRules"
         :disabled="!editable"
         align-right
@@ -48,7 +53,7 @@
         :mb="0"
       />
     </td>
-    <td class="text-right p-2">
+    <td class="text-right p-2 align-top">
       {{ amountFor(value) | money }}
     </td>
   </tr>

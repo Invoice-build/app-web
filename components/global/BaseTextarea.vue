@@ -1,5 +1,8 @@
 <template>
   <div :class="containerClasses">
+    <div v-if="!!label" class="text-gray-600">
+      {{ label }}
+    </div>
     <textarea
       :class="inputClasses"
       :style="inputStyles"

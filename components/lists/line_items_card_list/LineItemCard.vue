@@ -4,14 +4,24 @@
       Line item #{{ rowIndex + 1 }}
     </base-card-title>
     <base-card-content>
-      <base-text-input
+      <base-textarea
+        v-if="editable"
         v-model="value.description"
         :label="$t('labels.description')"
+        :placeholder="`${$t('labels.item_details')}...`"
         :required="rowIndex == 0"
         :rules="rowIndex == 0 ? [isRequired()] : []"
         :disabled="!editable"
         class="mb-2"
       />
+      <div v-else class="mb-2">
+        <div class="text-gray-600">
+          {{ $t('labels.description') }}
+        </div>
+        <div>
+          {{ value.description }}
+        </div>
+      </div>
       <base-text-input
         v-model="value.quantity"
         :label="$t('labels.units')"
@@ -34,15 +44,13 @@
       <div class="flex items-end">
         <base-text-input
           v-model="value.unit_price"
-          :label="$t('labels.price_per_unit')"
+          :label="`${$t('labels.price_per_unit')} (${currencyCode})`"
+          placeholder="e.g. 1"
           :required="rowIndex == 0"
           :rules="unitPriceRules"
           :disabled="!editable"
           class="flex-1"
         />
-        <span class="ml-2">
-          {{ currencyCode }}
-        </span>
       </div>
       <div class="text-right text-xl font-medium mt-4">
         {{ amountFor(value) | money }} {{ currencyCode }}
