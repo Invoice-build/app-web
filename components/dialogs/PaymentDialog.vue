@@ -49,7 +49,7 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapActions, mapState } from 'vuex'
 import WalletConnect from '@walletconnect/client'
 import QRCodeModal from '@walletconnect/qrcode-modal'
 
@@ -77,8 +77,17 @@ export default {
   },
 
   computed: {
+    ...mapState({
+      tokens: state => state.tokens.all
+    }),
+
     hasMetaMask () {
       return typeof window.ethereum !== 'undefined'
+    },
+
+    token () {
+      if (this.invoice.encrypted) return this.tokens.find(t => t.id === this.invoice.token_id)
+      return this.invoice.token
     }
   },
 
@@ -119,7 +128,7 @@ export default {
           (await this.$eth.account(network).fetch()),
           this.invoice.payment_address,
           this.invoice.total - this.invoice.paid_amount,
-          this.invoice.token
+          this.token
         )
 
         const eth_transaction = { reference: 'payment', network, tx_hash }
@@ -143,7 +152,7 @@ export default {
           this.walletConnect.accounts[0],
           this.invoice.payment_address,
           this.invoice.total - this.invoice.paid_amount,
-          this.invoice.token
+          this.token
         )
         const tx_hash = await this.walletConnect.connector.sendTransaction(tx)
         const network = this.walletConnect.network

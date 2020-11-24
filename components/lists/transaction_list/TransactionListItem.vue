@@ -47,7 +47,7 @@
         size="sm"
         circle
         flat
-        @click="$emit('expand', tx)"
+        @click.prevent="$emit('expand', tx)"
       />
       <base-btn
         v-else

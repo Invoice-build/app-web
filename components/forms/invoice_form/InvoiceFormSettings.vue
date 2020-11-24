@@ -24,6 +24,19 @@
         </p>
       </div>
     </div>
+    <div class="flex flex-wrap md:flex-no-wrap mt-4">
+      <div class="w-full md:w-1/3">
+        <h3 class="mr-2 text-gray-500">
+          {{ $t('labels.encrypt_e2e') }}:
+        </h3>
+      </div>
+      <div class="w-full flex">
+        <base-switch v-model="value.encrypted" :disabled="!value.password" size="sm" round no-margin />
+        <span v-if="!value.password" class="text-xs text-gray-400 ml-2">
+          Password required
+        </span>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -37,8 +50,14 @@ export default {
   },
 
   watch: {
-    value () {
-      this.$emit('change', this.value)
+    value: {
+      handler (newVal) {
+        this.$emit('change', this.value)
+        if (this.value.encrypted && !this.value.password) {
+          this.value.encrypted = false
+        }
+      },
+      deep: true
     }
   }
 }

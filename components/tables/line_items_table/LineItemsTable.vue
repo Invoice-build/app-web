@@ -168,7 +168,7 @@ export default {
   },
 
   beforeMount () {
-    this.taxBps = this.invoice.tax_bps
+    this.taxPercentage = this.invoice.tax_bps / 100
   },
 
   methods: {

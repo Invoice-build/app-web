@@ -111,6 +111,7 @@
 </template>
 
 <script>
+import CryptoJS from 'crypto-js'
 import { mapState, mapActions, mapGetters } from 'vuex'
 import InvoiceFormHeader from './invoice_form/InvoiceFormHeader.vue'
 import InvoiceFormPaymentDetails from './invoice_form/InvoiceFormPaymentDetails.vue'
@@ -156,6 +157,7 @@ export default {
         tax_bps: 0,
         payment_address: null,
         network: 'mainnet',
+        encrypted: false,
         line_items_attributes: [{}],
         issuer_contact_attributes: {
           address_attributes: {}
@@ -181,13 +183,23 @@ export default {
 
     selectedToken () {
       return this.tokens.find(t => t.id === this.form.token_id)
+    },
+
+    params () {
+      if (this.form.encrypted) return {
+        data_hash: this.generateInvoiceHash(),
+        password: this.form.password,
+        network: this.form.network,
+        token_id: this.form.token_id
+      }
+      return this.form
     }
   },
 
   watch: {
     invoice: {
-      handler (newVal) {
-        if (!this.editable) this.form = mergeDeep({}, this.form, this.invoice)
+      handler (newInvoice) {
+        if (!this.editable) this.form = mergeDeep({}, this.form, newInvoice)
       },
       deep: true
     }
@@ -196,7 +208,6 @@ export default {
   beforeMount () {
     this.form = mergeDeep({}, this.form, this.invoice)
     this.setDefaultToken()
-    // if (!this.form.tax_bps) this.invoice_.tax_bps = 0
   },
 
   methods: {
@@ -211,7 +222,7 @@ export default {
         this.submitting = true
         if (!this.isValidForm()) throw new Error('Please check errors above')
 
-        const invoice = await this.create(this.form)
+        const invoice = await this.create(this.params)
         this.$emit('saved', invoice)
       } catch (error) {
         this.handleSubmitError(error)
@@ -247,6 +258,10 @@ export default {
     setDefaultToken () {
       if (this.form.token_id) return
       this.form.token_id = this.tokens.find(token => token.code === 'ETH').id
+    },
+
+    generateInvoiceHash () {
+      return CryptoJS.AES.encrypt(JSON.stringify(this.form), this.form.password).toString()
     }
   }
 }

@@ -11,6 +11,14 @@
     </div>
     <div v-else class="py-0 md:py-16">
       <div class="invoice-container mx-auto">
+        <div v-if="!editable && invoice.encrypted" class="bg-gray-100 flex items-center p-4 rounded">
+          <div class="w-8 h-8 rounded-full flex items-center justify-center bg-gray-300">
+            <i class="fas fa-lock text-gray-500" />
+          </div>
+          <span class="text-gray-600 text-sm pl-4">
+            {{ $t('labels.encrypted_e2e') }}
+          </span>
+        </div>
         <invoice-form
           v-if="!loading"
           :invoice="invoice"
@@ -81,6 +89,7 @@ export default {
   methods: {
     ...mapActions({
       get: 'invoices/get',
+      getEncrypted: 'invoices/getEncrypted',
       getTransactions: 'invoices/eth_transactions/getAll',
       getTransaction: 'invoices/eth_transactions/get'
     }),
@@ -116,7 +125,9 @@ export default {
     async checkForTxConfirmation (txId) {
       try {
         await this.getTransaction({ invoiceId: this.id, txId })
-        if (!this.hasPendingTx) await this.get(this.id)
+        if (!this.hasPendingTx) {
+          this.invoice.encrypted ? await this.getEncrypted(this.id) : await this.get(this.id)
+        }
         return !this.hasPendingTx
       } catch (error) {
         console.error(error)
