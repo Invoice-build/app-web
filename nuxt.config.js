@@ -51,7 +51,7 @@ export default {
     '~/plugins/breakpoints',
     '~/plugins/v-hotkey',
     { src: '~/plugins/eth', ssr: false },
-    { src: "~/plugins/v-click-outside", ssr: false }
+    { src: '~/plugins/v-click-outside', ssr: false }
   ],
 
   components: [
