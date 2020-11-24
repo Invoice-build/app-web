@@ -62,7 +62,9 @@
     "payments": "Payments",
     "payment": "Payment",
     "hash": "Hash",
-    "item_details": "Item details"
+    "item_details": "Item details",
+    "encrypt_e2e": "Encrypt E2E",
+    "encrypted_e2e": "Encrypted E2E"
   },
   "hints": {
     "password": "Invoice payment pages are publically accessible by default, to make it private set a password."

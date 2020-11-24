@@ -43,7 +43,7 @@
         :disabled="submitting || hasPendingTx"
         block
         size="lg"
-        @click="paymentDialog = true"
+        @click.prevent="paymentDialog = true"
       >
         {{ $t('actions.pay_this_invoice') }}
       </base-btn>
@@ -59,7 +59,7 @@
     <no-ssr>
       <prefill-dialog
         :show="prefillDialog"
-        :url="`https://${$config.APP_DOMAIN}?prefill=${prefillHash}`"
+        :url="`https://${$config.APP_DOMAIN}?prefill=${invoiceHash}`"
         @close="prefillDialog = false"
       />
     </no-ssr>
@@ -90,7 +90,7 @@ export default {
 
   data () {
     return {
-      prefillHash: '',
+      invoiceHash: '',
       paymentDialog: false,
       prefillDialog: false
     }
@@ -106,20 +106,20 @@ export default {
   watch: {
     invoice: {
       handler (newInvoice) {
-        this.generatePrefillHash(newInvoice)
+        this.generateinvoiceHash(newInvoice)
       },
       deep: true
     }
   },
 
   beforeMount () {
-    this.generatePrefillHash(this.invoice)
+    this.generateinvoiceHash(this.invoice)
   },
 
   methods: {
-    generatePrefillHash (invoice) {
+    generateinvoiceHash (invoice) {
       const hash = CryptoJS.AES.encrypt(JSON.stringify(invoice), 'invoice.build').toString()
-      this.prefillHash = encodeURIComponent(hash)
+      this.invoiceHash = encodeURIComponent(hash)
     }
   }
 }
