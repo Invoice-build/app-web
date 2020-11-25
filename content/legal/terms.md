@@ -55,4 +55,4 @@ Please refer to our [Privacy Policy and Cookies Policy](https://invoice.build/le
 
 ## Contact
 
-If you have any questions about these Terms, please contact us at gareth@remotely.digital.
+If you have any questions about these Terms, please contact us at hello@invoice.build.

@@ -19,7 +19,7 @@
           Email:
         </span>
         <span>
-          gareth@remotely.digital
+          hello@invoice.build
         </span>
       </div>
       <div class="flex flex-col sm:flex-row mt-4">
