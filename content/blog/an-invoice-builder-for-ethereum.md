@@ -2,12 +2,11 @@
 title: The Ethereum Invoice Builder
 description: This post is an introduction to Invoice.build, what it is and what it might become.
 published: true
-publishedAt: 12 Oct 2020
-publishedTimestamp: 2020-10-12
-modifiedTimestamp: 2020-10-12
-author:
-  name: Gareth Fuller
-  twitter: garethafuller
+publishedAt: 27 Nov 2020
+publishedTimestamp: 2020-11-27
+modifiedTimestamp: 2020-11-27
+author_name: Gareth Fuller
+author_twitter: garethafuller
 ---
 
 # The Ethereum Invoice Builder

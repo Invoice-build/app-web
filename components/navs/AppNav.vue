@@ -53,9 +53,8 @@ export default {
       menuItems: [
         { label: this.$t('labels.new_invoice'), icon: 'fas fa-plus', url: '/', external: false },
         { label: this.$t('labels.about'), icon: 'fas fa-info-circle', url: '/about', external: false },
-        { label: this.$t('labels.code'), icon: 'fas fa-code', url: 'https://github.com/Invoice-build', external: true },
-        { label: this.$t('labels.roadmap'), icon: 'fas fa-road', url: 'https://trello.com/b/RKj2K6Hz', external: true },
-        { label: this.$t('labels.analytics'), icon: 'fas fa-chart-bar', url: 'https://app.usefathom.com/share/qktowsha/invoice.build', external: true },
+        { label: this.$t('labels.blog'), icon: 'fas fa-rss', url: '/blog', external: false },
+        { label: this.$t('labels.bip'), icon: 'fas fa-pencil-ruler', url: '/bip', external: false },
         { label: this.$t('labels.legal'), icon: 'fas fa-balance-scale', url: '/legal', external: false }
       ]
     }

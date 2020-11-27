@@ -24,3 +24,5 @@
 .nuxt-content li img { @apply my-2; }
 
 .nuxt-content img { @apply my-4 rounded; }
+
+.nuxt-content hr { @apply my-8; }

@@ -2,13 +2,19 @@
   <main class="p-4">
     <article class="w-full md:w-2/3 lg:w-1/2">
       <h1 class="font-bold leading-tight text-3xl mb-8">
-        Blog
+        Our Blog
       </h1>
-      <ul class="list-disc list-inside">
+      <ul class="list-disc ml-4">
         <li v-for="(post, i) in posts" :key="i">
           <nuxt-link :to="post.path" class="link">
             {{ post.title }}
           </nuxt-link>
+          <div class="text-xs text-gray-600">
+            Published {{ post.publishedAt }} by
+            <a :href="`https://twitter.com/${post.author_twitter}`" target="_blank" rel="noreferrer">
+              {{ post.author_name }}
+            </a>
+          </div>
         </li>
       </ul>
     </article>
@@ -23,7 +29,7 @@ export default {
     let posts
     try {
       posts = await $content('blog')
-        .only(['title', 'description', 'publishedAt', 'path'])
+        .only(['title', 'description', 'publishedAt', 'path', 'author_name', 'author_twitter'])
         .sortBy('publishedAt', 'asc')
         .limit(6)
         .where({ published: true })
