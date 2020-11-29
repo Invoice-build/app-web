@@ -61,7 +61,19 @@
 </template>
 
 <script>
+import { ogMeta } from '~/lib/meta'
+
 export default {
-  layout: 'content'
+  layout: 'content',
+
+  head () {
+    return {
+      title: 'Invoice.build Imprint',
+      meta: ogMeta({
+        title: 'Invoice.build Imprint',
+        url: 'https://invoice.build/legal'
+      })
+    }
+  }
 }
 </script>

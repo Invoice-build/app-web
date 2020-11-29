@@ -22,6 +22,8 @@
 </template>
 
 <script>
+import { ogMeta } from '~/lib/meta'
+
 export default {
   layout: 'content',
 
@@ -38,6 +40,17 @@ export default {
       return error({ statusCode: 404, message: 'Page not found' })
     }
     return { posts }
+  },
+
+  head () {
+    return {
+      title: 'Invoice.build Blog',
+      meta: ogMeta({
+        title: 'Invoice.build Blog',
+        description: 'The official blog for invoice.build. Here we share our journey, thoughts, stories and ideas.',
+        url: 'https://invoice.build/blog'
+      })
+    }
   }
 }
 </script>
