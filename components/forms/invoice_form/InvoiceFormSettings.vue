@@ -31,7 +31,13 @@
         </h3>
       </div>
       <div class="w-full flex">
-        <base-switch v-model="value.encrypted" :disabled="!value.password" size="sm" round no-margin />
+        <base-switch
+          v-model="value.encrypted"
+          :disabled="!value.password"
+          size="sm"
+          round
+          no-margin
+        />
         <span v-if="!value.password" class="text-xs text-gray-400 ml-2">
           Password required
         </span>

@@ -5,13 +5,15 @@
         type="checkbox"
         :name="name"
         :checked="checked"
+        v-bind="$attrs"
         v-on="listeners"
-        v-bind="$attrs">
-      <span :class="[`slider slider-${color} slider-${size}`, { round }]"></span>
+      >
+      <span :class="[`slider slider-${color} slider-${size}`, { round }]" />
     </label>
     <div
       v-show="hasError"
-      class="base-text-field-error text-red-500 text-sm absolute mt-1">
+      class="base-text-field-error text-red-500 text-sm absolute mt-1"
+    >
       {{ errors[0] }}
     </div>
   </div>
@@ -27,11 +29,11 @@ export default {
   },
 
   props: {
-    name: { type: String },
+    name: { type: String, default: 'inputSwitch' },
     round: { type: Boolean, default: false },
     color: { type: String, default: 'green' },
     checked: { type: Boolean, default: false },
-    rules: { type: Array },
+    rules: { type: Array, default: () => ([]) },
     validateOn: { type: String, default: 'change' },
     noMargin: { type: Boolean, default: false },
     size: {
