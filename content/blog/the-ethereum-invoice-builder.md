@@ -24,7 +24,7 @@ A select list of tokens are currently supported:
 - USDC
 - USDT
 
-![Token selection](/images/screenshots/token-selection.png)
+![Token selection](/images/blog/posts/the-ethereum-invoice-builder/token-selection.png)
 
 Invoice data is not currently stored on-chain, it is stored in a regular SQL database. Considering that IB is built for Ethereum tokens you might ask why that is?
 
@@ -36,13 +36,13 @@ The current point of the app is simply to provide context to Ethereum transactio
 
 Once an invoice has been created through IB, invoice payments can be made with Web3 enabled browsers and wallets supported by WalletConnect.
 
-![Payment dialog](/images/screenshots/payment-dialog.png)
+![Payment dialog](/images/blog/posts/the-ethereum-invoice-builder/payment-dialog.png)
 
 The crypto community and in particular the Ethereum community are naturally concerned about privacy and decentralization of applications built for their network. That is partly why it makes sense to move invoices completely on-chain at some point.
 
 In the meantime, I have added a couple of settings as a stop-gap for these concerns. Invoices can be password protected and if a password is provided the invoice can be E2E encrypted. This ensures that any identifiable information provided to create an invoice is private and only accessible to users who know the password.
 
-![Payment dialog](/images/screenshots/invoice-settings.png)
+![Payment dialog](/images/blog/posts/the-ethereum-invoice-builder/invoice-settings.png)
 
 In addition to these privacy settings, I have made everything possible about how the app is built and run public. This includes the [code](https://github.com/Invoice-build), [roadmap](https://trello.com/b/RKj2K6Hz/product-roadmap), [analytics](https://app.usefathom.com/share/qktowsha/invoice.build#/?range=last_7_days&site=27918), basically everything except the data stored in the database.
 
