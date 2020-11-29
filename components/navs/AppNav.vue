@@ -74,11 +74,16 @@ export default {
 
     btnDisplayClass () {
       return this.showBtn ? 'visible' : 'invisible'
+    },
+
+    isInvoicePage () {
+      const path = this.$route.fullPath
+      return path === '/' || path.split('/').includes('invoices')
     }
   },
 
   mounted () {
-    if (window.innerWidth <= 600) window.addEventListener('scroll', this.toggleBtnOnScroll, true)
+    if (window.innerWidth <= 600 && this.isInvoicePage) window.addEventListener('scroll', this.toggleBtnOnScroll, true)
   },
 
   beforeDestroy () {
