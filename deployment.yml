@@ -22,9 +22,9 @@ spec:
           - name: APP_ENV
             value: 'production'
           - name: API_URL
-            value: 'https://api-k8s.invoice.build'
+            value: 'https://api.invoice.build'
           - name: APP_DOMAIN
-            value: 'https://k8s.invoice.build'
+            value: 'https://invoice.build'
           - name: FATHOM_SITE_ID
             value: 'QKTOWSHA'
           - name: INFURA_PROJECT_ID
