@@ -7,6 +7,10 @@ export default {
 
   loading: false,
 
+  server: {
+    host: '0.0.0.0'
+  },
+
   publicRuntimeConfig: {
     APP_ENV: process.env.APP_ENV || 'development',
     APP_DOMAIN: process.env.APP_DOMAIN || 'localhost:3000',

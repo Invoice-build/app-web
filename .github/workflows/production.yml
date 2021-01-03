@@ -1,0 +1,119 @@
+name: Production CI/CD
+
+on:
+  push:
+    branches:
+      - master
+  workflow_dispatch:
+
+env:
+  IMAGE_PATH: invoicebuild/web
+  URL: https://invoice.build
+  K8S_NAMESPACE: invoice-build
+  K8S_DEPLOYMENT: web
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Use Node.js
+      uses: actions/setup-node@v1
+      with:
+        node-version: '14.x'
+    - name: Install deps
+      run: yarn install --frozen-lockfile 
+    - name: Run lint
+      run: yarn lint
+        
+  test:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Use Node.js
+      uses: actions/setup-node@v1
+      with:
+        node-version: '14.x'
+    - name: Install deps
+      run: yarn install --frozen-lockfile 
+    - name: Run tests
+      run: yarn test
+  build:
+    needs: [lint, test]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v2
+      
+      - name: Set tag
+        run: echo "IMAGE_TAG=$(echo $GITHUB_SHA | cut -c 1-7)" >> $GITHUB_ENV
+
+      - name: Login to Docker Hub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_ACCESS_TOKEN }}
+
+      - name: Set up Docker Buildx
+        id: buildx
+        uses: docker/setup-buildx-action@v1
+
+      - name: Cache Docker layers
+        uses: actions/cache@v2
+        with:
+          path: /tmp/.buildx-cache
+          key: ${{ runner.os }}-buildx-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-buildx-
+      
+      - name: Build and push
+        id: docker_build
+        uses: docker/build-push-action@v2
+        with:
+          context: ./
+          file: ./Dockerfile
+          push: true
+          tags: |
+            ${{ env.IMAGE_PATH }}:${{ env.IMAGE_TAG }}
+          cache-from: type=local,src=/tmp/.buildx-cache
+          cache-to: type=local,dest=/tmp/.buildx-cache
+
+  deploy:
+    needs: [build]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Start deployment
+        uses: bobheadxi/deployments@v0.4.3
+        id: deployment
+        with:
+          step: start
+          token: ${{ secrets.GITHUB_TOKEN }}
+          env: production
+
+      - name: Checkout repo
+        uses: actions/checkout@v2
+      
+      - name: Set tag
+        run: echo "IMAGE_TAG=$(echo $GITHUB_SHA | cut -c 1-7)" >> $GITHUB_ENV
+
+      - name: Update deployment manifest
+        run: sed -i 's|<IMAGE>|${{ env.IMAGE_PATH }}:'${{ env.IMAGE_TAG }}'|' $GITHUB_WORKSPACE/deployment.yml
+
+      - name: Add kube config
+        run: mkdir -p $GITHUB_WORKSPACE/.kube && echo '${{ secrets.KUBECONFIG }}' | base64 -d > $GITHUB_WORKSPACE/.kube/config
+
+      - name: Deploy to Kubernetes
+        run: kubectl apply --kubeconfig $GITHUB_WORKSPACE/.kube/config -f $GITHUB_WORKSPACE/deployment.yml
+
+      - name: Verify deployment
+        run: kubectl rollout status --kubeconfig $GITHUB_WORKSPACE/.kube/config --namespace ${{ env.K8S_NAMESPACE }} deployment/${{ env.K8S_DEPLOYMENT }}
+    
+      - name: Update deployment status
+        uses: bobheadxi/deployments@v0.4.3
+        if: always()
+        with:
+          step: finish
+          token: ${{ secrets.GITHUB_TOKEN }}
+          status: ${{ job.status }}
+          deployment_id: ${{ steps.deployment.outputs.deployment_id }}
+          env_url: ${{ env.URL }}

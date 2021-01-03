@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web
+  namespace: invoice-build
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: web
+  template:
+    metadata:
+      labels:
+        app: web
+    spec:
+      containers:
+        - name: web
+          image: <IMAGE>
+          ports:
+            - containerPort: 3000
+          env:
+          - name: APP_ENV
+            value: 'production'
+          - name: API_URL
+            value: 'https://api-k8s.invoice.build'
+          - name: APP_DOMAIN
+            value: 'https://k8s.invoice.build'
+          - name: FATHOM_SITE_ID
+            value: 'QKTOWSHA'
+          - name: INFURA_PROJECT_ID
+            valueFrom:
+              secretKeyRef:
+                name: web
+                key: INFURA_PROJECT_ID
+          imagePullPolicy: Always
+      imagePullSecrets:
+        - name: regcred
