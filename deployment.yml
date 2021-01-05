@@ -25,8 +25,6 @@ spec:
             value: 'https://api.invoice.build'
           - name: APP_DOMAIN
             value: 'https://invoice.build'
-          - name: FATHOM_SITE_ID
-            value: 'QKTOWSHA'
           - name: INFURA_PROJECT_ID
             valueFrom:
               secretKeyRef:

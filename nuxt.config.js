@@ -40,7 +40,7 @@ export default {
     ],
     script: [
       { src: '/js/csrf.js' },
-      { src: 'https://squid.invoice.build/script.js', site: process.env.FATHOM_SITE_ID, defer: true }
+      { src: 'https://squid.invoice.build/script.js', site: 'QKTOWSHA', defer: true }
     ]
   },
 
