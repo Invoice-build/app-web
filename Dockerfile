@@ -26,6 +26,7 @@ COPY --from=build --chown=deploy:deploy /build/node_modules ./node_modules/
 COPY --from=build --chown=deploy:deploy /build/static ./static/
 COPY --from=build --chown=deploy:deploy /build/lib ./lib/
 COPY --from=build --chown=deploy:deploy /build/.nuxt ./.nuxt/
+COPY --from=build --chown=deploy:deploy /build/content ./content/
 COPY --from=build --chown=deploy:deploy /build/locales ./locales/
 COPY --from=build --chown=deploy:deploy /build/tailwind.config.js ./tailwind.config.js
 
