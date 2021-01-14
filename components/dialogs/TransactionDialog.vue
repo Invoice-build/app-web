@@ -73,7 +73,7 @@
 </template>
 
 <script>
-import EthAddress from '~/components/formatting/EthAddress.vue'
+import EthAddress from '~/components/eth/EthAddress.vue'
 
 export default {
   name: 'TransactionDialog',

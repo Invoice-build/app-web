@@ -1,7 +1,7 @@
 <template>
-  <div class="w-full">
+  <span>
     {{ label }}
-  </div>
+  </span>
 </template>
 
 <script>
@@ -17,6 +17,13 @@ export default {
   data () {
     return {
       label: ''
+    }
+  },
+
+  watch: {
+    address (newAddresss) {
+      this.truncateLabel(newAddresss)
+      if (!this.hash) this.setEnsLabel()
     }
   },
 
