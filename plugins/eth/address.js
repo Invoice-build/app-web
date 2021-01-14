@@ -12,6 +12,6 @@ export default class Address extends Base {
   }
 
   toMixedCase (address) {
-    return this.web3.utils.toChecksumAddress(address)
+    return Web3.utils.toChecksumAddress(address)
   }
 }
